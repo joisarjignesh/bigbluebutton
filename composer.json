@@ -12,7 +12,7 @@
         {
             "name": "Jignesh Joisar",
             "email": "jigneshjoisar@gmail.com",
-            "homepage": "https://beyondcode.de",
+            "homepage": "https://jigneshjoisar.web.app",
             "role": "Developer"
         }
     ],
@@ -46,6 +46,8 @@
     "config": {
         "sort-packages": true
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "laravel": {
             "providers": [
