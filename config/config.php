@@ -1,0 +1,9 @@
+<?php
+
+/*
+ * You can place your custom package configuration in here.
+ */
+return [
+    'BBB_SECURITY_SALT' => env('BBB_SECURITY_SALT', 'lVMFfmrQ4kyhuNwI1MrUtb5LXDTBHjiNI4oyc887f4'),
+    'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', 'http://157.245.94.153/bigbluebutton/'),
+];

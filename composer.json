@@ -1,0 +1,59 @@
+{
+    "name": "joisarjignesh/bigbluebutton",
+    "description": "Bigbluebutton integration in laravel",
+    "keywords": [
+        "joisarjignesh",
+        "bigbluebutton"
+    ],
+    "homepage": "https://github.com/joisarjignesh/bigbluebutton",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jignesh Joisar",
+            "email": "jigneshjoisar@gmail.com",
+            "homepage": "https://beyondcode.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0",
+        "bigbluebutton/bigbluebutton-api-php": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JoisarJignesh\\Bigbluebutton\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JoisarJignesh\\Bigbluebutton\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JoisarJignesh\\Bigbluebutton\\BigbluebuttonServiceProvider"
+            ],
+            "aliases": {
+                "Bigbluebutton": "JoisarJignesh\\Bigbluebutton\\Facades\\Bigbluebutton"
+            }
+        }
+    }
+}
