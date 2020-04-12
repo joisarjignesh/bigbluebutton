@@ -24,7 +24,7 @@ class BigbluebuttonServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'bigbluebutton');
+        $this->mergeConfigFrom(__DIR__.'/../config/bigbluebutton.php', 'bigbluebutton');
 
         $server_base_url = $this->app['config']->get('bigbluebutton.BBB_SERVER_BASE_URL');
         $server_salt = $this->app['config']->get('bigbluebutton.BBB_SECURITY_SALT');
