@@ -14,7 +14,7 @@ class BigbluebuttonServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('bigbluebutton.php'),
+                __DIR__.'/../config/bigbluebutton.php' => config_path('bigbluebutton.php'),
             ], 'bigbluebutton-config');
         }
     }

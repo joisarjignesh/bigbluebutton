@@ -3,7 +3,10 @@
     "description": "Bigbluebutton integration in laravel",
     "keywords": [
         "joisarjignesh",
-        "bigbluebutton"
+        "bigbluebutton",
+        "api",
+        "bbb",
+        "meeting"
     ],
     "homepage": "https://github.com/joisarjignesh/bigbluebutton",
     "license": "MIT",
@@ -41,13 +44,16 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
     },
     "config": {
         "sort-packages": true
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "support": {
+        "source": "https://github.com/joisarjignesh/bigbluebutton",
+        "issues": "https://github.com/joisarjignesh/bigbluebutton/issues"
+    },
     "extra": {
         "laravel": {
             "providers": [

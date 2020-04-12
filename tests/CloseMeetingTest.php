@@ -22,6 +22,7 @@ class CloseMeetingTest extends TestCase
     /** @test */
     public function true_is_true()
     {
-        $this->assertCount(count(Bigbluebutton::all()), 1);
+        $array = [1];
+        $this->assertCount(1, $array);
     }
 }
