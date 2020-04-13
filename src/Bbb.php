@@ -41,7 +41,12 @@ class Bbb
         $this->setUrl($this->bbb->getMeetingsUrl());
         if ($this->response->success()) {
             if (count($this->response->getRawXml()->meetings->meeting) > 0) {
-                return collect(XmlToArray($this->response->getRawXml()->meetings)['meeting']);
+                $meetings = [];
+                foreach ($this->response->getRawXml()->meetings->meeting as $meeting) {
+                    $meetings[] = $meeting;
+                }
+
+                return collect($meetings);
             }
         }
 
@@ -53,6 +58,10 @@ class Bbb
      * $meeting
      *
      * @param $meeting
+     *
+     * required fields
+     * meetingID
+     * meetingName
      *
      * @return mixed
      */
@@ -73,6 +82,9 @@ class Bbb
 
     /**
      * @param $meeting
+     *
+     * required fields:
+     * meetingID
      *
      * @return bool
      */
@@ -98,6 +110,11 @@ class Bbb
      *  Join meeting
      *
      * @param $meeting
+     * required fields
+     *
+     *  meetingID
+     *  userName join by name
+     *  password which role want to join
      *
      * @return string
      */
@@ -109,7 +126,7 @@ class Bbb
 
         $this->setUrl($this->bbb->getJoinMeetingURL($meeting));
 
-        if($meeting->isRedirect()) {
+        if ($meeting->isRedirect()) {
             return redirect()->to($this->bbb->getJoinMeetingURL($meeting));
         }
 
@@ -120,6 +137,9 @@ class Bbb
      *  Returns information about the meeting
      *
      * @param $meeting
+     * required fields
+     * meetingID
+     * moderatorPW must be there moderator password
      *
      * @return \Illuminate\Support\Collection
      */
@@ -138,14 +158,26 @@ class Bbb
         return collect([]);
     }
 
+    /*
+         * required fields
+         * meetingID
+         * meetingName
+         * userName
+         * attendeePW
+         * moderatorPW
+         */
     public function start($parameters)
     {
         return $this->initStart($parameters);
     }
+
     /**
      *  Close meeting
      *
      * @param  $meeting
+     * required fields:
+     * meetingID
+     * moderatorPW close meeting must be there moderator password
      *
      * @return bool
      */
@@ -167,7 +199,12 @@ class Bbb
     /**
      *
      * @param $recording
+     * required fields
+     * meetingID
      *
+     * optional fields
+     * recordID
+     * state
      * @return \Illuminate\Support\Collection
      */
     public function getRecordings($recording)
@@ -179,20 +216,30 @@ class Bbb
         $this->setUrl($this->bbb->getRecordingsUrl($recording));
         $this->response = $this->bbb->getRecordings($recording);
         if (count($this->response->getRawXml()->recordings->recording) > 0) {
-            return collect(XmlToArray($this->response->getRawXml()->recordings)['recording']);
+            $recordings = [];
+            foreach ($this->response->getRawXml()->recordings->recording as $r) {
+                $recordings[] = $r;
+            }
+
+            return collect($recordings);
         }
 
         return collect([]);
     }
 
+    /*
+     * required fields
+     * recordingID
+     */
     public function deleteRecordings($recording)
     {
-        if(!$recording instanceof DeleteRecordingsParameters){
+        if (!$recording instanceof DeleteRecordingsParameters) {
             $recording = $this->initDeleteRecordings($recording);
         }
 
         $this->setUrl($this->bbb->getDeleteRecordingsUrl($recording));
         $this->response = $this->bbb->deleteRecordings($recording);
+
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
