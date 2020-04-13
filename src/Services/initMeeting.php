@@ -1,8 +1,6 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton\Services;
-
 
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
@@ -15,8 +13,6 @@ use Illuminate\Support\Str;
 
 trait initMeeting
 {
-
-
     public function initCreateMeeting(array $parameters)
     {
         $request = Fluent($parameters);
@@ -32,7 +28,6 @@ trait initMeeting
             $meetingParams->setMaxParticipants($request->maxParticipants);
         }
 
-
         return $meetingParams;
     }
 
@@ -40,7 +35,7 @@ trait initMeeting
     {
         $request = Fluent($parameters);
 
-        return (new EndMeetingParameters($request->meetingID, $request->password));
+        return new EndMeetingParameters($request->meetingID, $request->password);
     }
 
     public function initJoinMeeting(array $parameters)
@@ -61,14 +56,14 @@ trait initMeeting
     {
         $request = Fluent($parameters);
 
-        return (new IsMeetingRunningParameters($request->meetingID));
+        return new IsMeetingRunningParameters($request->meetingID);
     }
 
     public function initGetMeetingInfo($parameters)
     {
         $request = Fluent($parameters);
 
-        return (new GetMeetingInfoParameters($request->meetingID, $request->password));
+        return new GetMeetingInfoParameters($request->meetingID, $request->password);
     }
 
     public function initGetRecordings(array $parameters)
@@ -77,10 +72,10 @@ trait initMeeting
 
         $recordings = new GetRecordingsParameters();
         $recordings->setMeetingId($request->meetingID);
-        if($request->recordID) {
+        if ($request->recordID) {
             $recordings->setRecordId($request->recordID);
         }
-        if($request->state) {
+        if ($request->state) {
             $recordings->setState($request->state);
         }
 
@@ -90,7 +85,8 @@ trait initMeeting
     public function initDeleteRecordings($recording)
     {
         $request = Fluent($recording);
-        return (new DeleteRecordingsParameters($request->recordingID));
+
+        return new DeleteRecordingsParameters($request->recordingID);
     }
 
     public function initStart(array $parameters)
@@ -101,6 +97,4 @@ trait initMeeting
             return $this->join($parameters);
         }
     }
-
-
 }

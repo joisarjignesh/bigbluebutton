@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton;
 
 use BigBlueButton\BigBlueButton;
@@ -31,7 +30,7 @@ class Bbb
     }
 
     /**
-     *  Return a list of all meetings
+     *  Return a list of all meetings.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -48,9 +47,8 @@ class Bbb
         return collect([]);
     }
 
-
     /**
-     * $meeting
+     * $meeting.
      *
      * @param $meeting
      *
@@ -58,7 +56,7 @@ class Bbb
      */
     public function create($meeting)
     {
-        if (!$meeting instanceof CreateMeetingParameters) {
+        if (! $meeting instanceof CreateMeetingParameters) {
             $meeting = $this->initCreateMeeting($meeting);
         }
 
@@ -78,7 +76,7 @@ class Bbb
      */
     public function isMeetingRunning($meeting)
     {
-        if (!$meeting instanceof IsMeetingRunningParameters) {
+        if (! $meeting instanceof IsMeetingRunningParameters) {
             $meeting = $this->initIsMeetingRunning($meeting);
         }
 
@@ -86,7 +84,7 @@ class Bbb
         $this->response = $this->bbb->isMeetingRunning($meeting);
         if ($this->response->success()) {
             $response = XmlToArray($this->response->getRawXml());
-            if (isset($response['running']) && $response['running'] == "true") {
+            if (isset($response['running']) && $response['running'] == 'true') {
                 return true;
             }
         }
@@ -95,7 +93,7 @@ class Bbb
     }
 
     /**
-     *  Join meeting
+     *  Join meeting.
      *
      * @param $meeting
      *
@@ -103,13 +101,13 @@ class Bbb
      */
     public function join($meeting)
     {
-        if (!$meeting instanceof JoinMeetingParameters) {
+        if (! $meeting instanceof JoinMeetingParameters) {
             $meeting = $this->initJoinMeeting($meeting);
         }
 
         $this->setUrl($this->bbb->getJoinMeetingURL($meeting));
 
-        if($meeting->isRedirect()) {
+        if ($meeting->isRedirect()) {
             return redirect()->to($this->bbb->getJoinMeetingURL($meeting));
         }
 
@@ -117,7 +115,7 @@ class Bbb
     }
 
     /**
-     *  Returns information about the meeting
+     *  Returns information about the meeting.
      *
      * @param $meeting
      *
@@ -125,7 +123,7 @@ class Bbb
      */
     public function getMeetingInfo($meeting)
     {
-        if (!$meeting instanceof GetMeetingInfoParameters) {
+        if (! $meeting instanceof GetMeetingInfoParameters) {
             $meeting = $this->initGetMeetingInfo($meeting);
         }
 
@@ -142,8 +140,9 @@ class Bbb
     {
         return $this->initStart($parameters);
     }
+
     /**
-     *  Close meeting
+     *  Close meeting.
      *
      * @param  $meeting
      *
@@ -151,7 +150,7 @@ class Bbb
      */
     public function close($meeting)
     {
-        if (!$meeting instanceof EndMeetingParameters) {
+        if (! $meeting instanceof EndMeetingParameters) {
             $meeting = $this->initCloseMeeting($meeting);
         }
 
@@ -165,14 +164,13 @@ class Bbb
     }
 
     /**
-     *
      * @param $recording
      *
      * @return \Illuminate\Support\Collection
      */
     public function getRecordings($recording)
     {
-        if (!$recording instanceof GetRecordingsParameters) {
+        if (! $recording instanceof GetRecordingsParameters) {
             $recording = $this->initGetRecordings($recording);
         }
 
@@ -187,12 +185,13 @@ class Bbb
 
     public function deleteRecordings($recording)
     {
-        if(!$recording instanceof DeleteRecordingsParameters){
+        if (! $recording instanceof DeleteRecordingsParameters) {
             $recording = $this->initDeleteRecordings($recording);
         }
 
         $this->setUrl($this->bbb->getDeleteRecordingsUrl($recording));
         $this->response = $this->bbb->deleteRecordings($recording);
+
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
@@ -211,6 +210,4 @@ class Bbb
     {
         $this->url = $url;
     }
-
-
 }
