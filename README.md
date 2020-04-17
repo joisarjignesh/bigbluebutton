@@ -121,7 +121,7 @@ Bigbluebutton::close([
      //'redirect' => false // only want to create and meeting and get join url then use this parameter 
  ]);
 
-return response()->json($url);
+return response()->to($url);
  ```
  
 - Get all meetings  
