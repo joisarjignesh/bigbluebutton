@@ -32,7 +32,7 @@ class BigbluebuttonServiceProvider extends ServiceProvider
         putenv("BBB_SERVER_BASE_URL=$server_base_url");
         putenv("BBB_SECURITY_SALT=$server_salt");
 
-        $this->app->bind('Bigbluebutton', function () {
+        $this->app->singleton('Bigbluebutton', function () {
             return new Bbb(new BigBlueButton());
         });
     }

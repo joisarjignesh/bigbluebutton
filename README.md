@@ -80,11 +80,13 @@ Bigbluebutton::getMeetingInfo([
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
-Bigbluebutton::join([
+return response()->to(
+ Bigbluebutton::join([
     'meetingID' => 'tamku',
     'userName' => 'disa',
     'password' => 'attendee' //which user role want to join set password here
-]);
+ ])
+);
 ```
 
 - Join meeting but does want to redirect into BigBlueButton server
@@ -96,6 +98,8 @@ Bigbluebutton::join([
     'redirect' => false, //it will not redirect into bigblueservr
 ]);
 ```
+
+
 - Close meeting
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
@@ -109,13 +113,15 @@ Bigbluebutton::close([
 - Start metting (if will check first meeting is there or not if not then create meeting and join meeting else meeting
  is there then it directly join a meeting user join as moderator)
  ```php
- \Bigbluebutton::start([
+ $url = \Bigbluebutton::start([
      'meetingID' => 'tamku',
      'moderatorPW' => 'moderator', //moderator password set here
      'attendeePW' => 'attendee', //attendee password here
      'userName' => 'John Deo',//for join meeting 
      //'redirect' => false // only want to create and meeting and get join url then use this parameter 
  ]);
+
+return response()->json($url);
  ```
  
 - Get all meetings  

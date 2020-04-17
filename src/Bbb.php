@@ -23,13 +23,20 @@ class Bbb
      */
     protected $bbb;
 
-    protected $url;
 
     public function __construct(BigBlueButton $bbb)
     {
         $this->bbb = $bbb;
     }
 
+    /*
+     * return BigBlueButton\BigBlueButton
+     * return BigBlueButton Class of Api class
+     */
+    public function make()
+    {
+        return $this->bbb;
+    }
     /**
      *  Return a list of all meetings
      *
@@ -38,7 +45,6 @@ class Bbb
     public function all()
     {
         $this->response = $this->bbb->getMeetings();
-        $this->setUrl($this->bbb->getMeetingsUrl());
         if ($this->response->success()) {
             if (count($this->response->getRawXml()->meetings->meeting) > 0) {
                 $meetings = [];
@@ -71,7 +77,6 @@ class Bbb
             $meeting = $this->initCreateMeeting($meeting);
         }
 
-        $this->setUrl($this->bbb->getCreateMeetingUrl($meeting));
         $this->response = $this->bbb->createMeeting($meeting);
         if ($this->response->failed()) {
             return $this->response->getMessage();
@@ -94,7 +99,6 @@ class Bbb
             $meeting = $this->initIsMeetingRunning($meeting);
         }
 
-        $this->setUrl($this->bbb->getIsMeetingRunningUrl($meeting));
         $this->response = $this->bbb->isMeetingRunning($meeting);
         if ($this->response->success()) {
             $response = XmlToArray($this->response->getRawXml());
@@ -124,13 +128,11 @@ class Bbb
             $meeting = $this->initJoinMeeting($meeting);
         }
 
-        $this->setUrl($this->bbb->getJoinMeetingURL($meeting));
-
         if ($meeting->isRedirect()) {
-            return redirect()->to($this->bbb->getJoinMeetingURL($meeting));
+            return $this->bbb->getJoinMeetingURL($meeting);
         }
 
-        return collect(XmlToArray($this->bbb->joinMeeting($meeting)->getRawXml()));
+        return $this->bbb->joinMeeting($meeting)->getUrl();
     }
 
     /**
@@ -149,7 +151,6 @@ class Bbb
             $meeting = $this->initGetMeetingInfo($meeting);
         }
 
-        $this->setUrl($this->bbb->getMeetingInfoUrl($meeting));
         $this->response = $this->bbb->getMeetingInfo($meeting);
         if ($this->response->success()) {
             return collect(XmlToArray($this->response->getRawXml()));
@@ -187,7 +188,6 @@ class Bbb
             $meeting = $this->initCloseMeeting($meeting);
         }
 
-        $this->setUrl($this->bbb->getEndMeetingURL($meeting));
         $this->response = $this->bbb->endMeeting($meeting);
         if ($this->response->success()) {
             return true;
@@ -213,7 +213,6 @@ class Bbb
             $recording = $this->initGetRecordings($recording);
         }
 
-        $this->setUrl($this->bbb->getRecordingsUrl($recording));
         $this->response = $this->bbb->getRecordings($recording);
         if (count($this->response->getRawXml()->recordings->recording) > 0) {
             $recordings = [];
@@ -237,27 +236,8 @@ class Bbb
             $recording = $this->initDeleteRecordings($recording);
         }
 
-        $this->setUrl($this->bbb->getDeleteRecordingsUrl($recording));
         $this->response = $this->bbb->deleteRecordings($recording);
-
         return collect(XmlToArray($this->response->getRawXml()));
     }
-
-    /**
-     * @return mixed
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param mixed $url
-     */
-    private function setUrl($url): void
-    {
-        $this->url = $url;
-    }
-
 
 }

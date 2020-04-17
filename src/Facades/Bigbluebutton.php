@@ -7,15 +7,15 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static array all()
- * @method static isMeetingRunning(array $array)
- * @method static closeMeeting(array $array)
- * @method static getMeetingInfo(array $array)
- * @method static create(array $array)
- * @method static close(array $array)
- * @method static join(array $array)
- * @method static start(array $array)
- * @method static getRecordings(array $array)
- * @method static deleteRecordings(array $array)
+ * @method static isMeetingRunning($arrayOtherWiseObject)
+ * @method static getMeetingInfo($arrayOtherWiseObject)
+ * @method static create($arrayOtherWiseObject)
+ * @method static close($arrayOtherWiseObject)
+ * @method static join($arrayOtherWiseObject)
+ * @method static start($arrayOtherWiseObject)
+ * @method static getRecordings($arrayOtherWiseObject)
+ * @method static deleteRecordings($arrayOtherWiseObject)
+ * @method static make()
  *
  * @see \JoisarJignesh\Bigbluebutton\Bbb
  */

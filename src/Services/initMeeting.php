@@ -171,13 +171,14 @@ trait initMeeting
     {
         if ($this->getMeetingInfo($parameters)->isEmpty()) {
             $object = $this->create($parameters);
-            if (!$object->isEmpty()) {
+            if (method_exists($object, 'isEmpty') && !$object->isEmpty()) {
                 return $this->join($this->makeJoinMeetingArray($object, $parameters));
             }
         } else {
             if (isset($parameters['moderatorPW'])) {
                 $parameters['password'] = trim($parameters['moderatorPW']);
             }
+
             return $this->join($parameters);
         }
     }
