@@ -213,7 +213,12 @@ class Bbb
             $recording = $this->initGetRecordings($recording);
         }
 
+        //2265544ef7453eed3114ae608a8501ffec72f6c0-1587228670330
+        //0x8xbjIO4EPMlxhVIZVh
+
+       // dd($recording);
         $this->response = $this->bbb->getRecordings($recording);
+       // dd($this->response);
         if (count($this->response->getRawXml()->recordings->recording) > 0) {
             $recordings = [];
             foreach ($this->response->getRawXml()->recordings->recording as $r) {

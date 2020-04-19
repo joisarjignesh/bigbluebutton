@@ -26,27 +26,66 @@ trait initMeeting
     {
         $request = Fluent($parameters);
         $meetingParams = new CreateMeetingParameters($request->meetingID, $request->meetingName);
-        if ($request->duration) {
-            $meetingParams->setDuration($request->duration);
-        }
-
-        $meetingParams->setModeratorPassword($request->get('moderatorPW', Str::random(10)));
-        $meetingParams->setAttendeePassword($request->get('attendeePW', Str::random(10)));
-
-        if ($request->record) {
-            $meetingParams->setRecord(true);
-            $meetingParams->setAllowStartStopRecording(true);
-            $meetingParams->setAutoStartRecording(true);
-        }
-
-        if ($request->maxParticipants) {
-            $meetingParams->setMaxParticipants($request->maxParticipants);
-        }
-
-        if ($request->logoutUrl) {
-            $meetingParams->setLogoutUrl($request->logoutUrl);
-        }
-
+        $meetingParams->setModeratorPassword($request->get('moderatorPW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
+        $meetingParams->setAttendeePassword($request->get('attendeePW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
+        $meetingParams->setDuration($request->get('duration', config('bigbluebutton.create.duration', null)));
+        $meetingParams->setRecord($request->get('record', config('bigbluebutton.create.record', false)));
+        $meetingParams->setMaxParticipants($request->get('maxParticipants', config('bigbluebutton.create.maxParticipants', null)));
+        $meetingParams->setLogoutUrl($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)));
+        $meetingParams->setWelcomeMessage(
+            $request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null))
+        );
+        $meetingParams->setDialNumber(
+            $request->get('dialNumber', config('bigbluebutton.create.dialNumber', null))
+        );
+        $meetingParams->setBreakout(
+            $request->get('isBreakout', config('bigbluebutton.create.isBreakout', false))
+        );
+        $meetingParams->setModeratorOnlyMessage(
+            $request->get('moderatorOnlyMessage', config('bigbluebutton.create.moderatorOnlyMessage', null))
+        );
+        $meetingParams->setAutoStartRecording(
+            $request->get('autoStartRecording', config('bigbluebutton.create.autoStartRecording', false))
+        );
+        $meetingParams->setAllowStartStopRecording(
+            $request->get('allowStartStopRecording', config('bigbluebutton.create.allowStartStopRecording', true))
+        );
+        $meetingParams->setWebcamsOnlyForModerator(
+            $request->get('webcamsOnlyForModerator', config('bigbluebutton.create.webcamsOnlyForModerator', false))
+        );
+        $meetingParams->setLogo(
+            $request->get('logo', config('bigbluebutton.create.logo', null))
+        );
+        $meetingParams->setCopyright(
+            $request->get('copyright', config('bigbluebutton.create.copyright', null))
+        );
+        $meetingParams->setMuteOnStart(
+            $request->get('muteOnStart', config('bigbluebutton.create.muteOnStart', false))
+        );
+        $meetingParams->setLockSettingsDisableCam(
+            $request->get('lockSettingsDisableCam', config('bigbluebutton.create.lockSettingsDisableCam', false))
+        );
+        $meetingParams->setLockSettingsDisableMic(
+            $request->get('lockSettingsDisableMic', config('bigbluebutton.create.lockSettingsDisableMic', false))
+        );
+        $meetingParams->setLockSettingsDisablePrivateChat(
+            $request->get('lockSettingsDisablePrivateChat', config('bigbluebutton.create.lockSettingsDisablePrivateChat', false))
+        );
+        $meetingParams->setLockSettingsDisablePublicChat(
+            $request->get('lockSettingsDisablePublicChat', config('bigbluebutton.create.lockSettingsDisablePublicChat', false))
+        );
+        $meetingParams->setLockSettingsDisableNote(
+            $request->get('lockSettingsDisableNote', config('bigbluebutton.create.lockSettingsDisableNote', false))
+        );
+        $meetingParams->setLockSettingsLockedLayout(
+            $request->get('lockSettingsLockedLayout', config('bigbluebutton.create.lockSettingsLockedLayout', false))
+        );
+        $meetingParams->setLockSettingsLockOnJoin(
+            $request->get('lockSettingsLockOnJoin', config('bigbluebutton.create.lockSettingsLockOnJoin', false))
+        );
+        $meetingParams->setLockSettingsLockOnJoinConfigurable(
+            $request->get('lockSettingsLockOnJoinConfigurable', config('bigbluebutton.create.lockSettingsLockOnJoinConfigurable', false))
+        );
 
         return $meetingParams;
     }
@@ -74,12 +113,23 @@ trait initMeeting
     {
         $request = Fluent($parameters);
         $meetingParams = new JoinMeetingParameters($request->meetingID, $request->userName, $request->password);
-        $meetingParams->setRedirect($request->get('redirect', true));
-        $meetingParams->setJoinViaHtml5($request->get('joinViaHtml5', true));
-
-
-        if ($request->userId) {
-            $meetingParams->setUserId($request->userId);
+        $meetingParams->setRedirect($request->get('redirect', config('bigbluebutton.join.redirect', true)));
+        $meetingParams->setJoinViaHtml5($request->get('joinViaHtml5', config('bigbluebutton.join.joinViaHtml5', true)));
+        $meetingParams->setUserId($request->get('userId', null));
+        if ($request->createTime) {
+            $meetingParams->setCreationTime($request->createTime);
+        }
+        if ($request->configToken) {
+            $meetingParams->setConfigToken($request->configToken);
+        }
+        if ($request->webVoiceConf) {
+            $meetingParams->setWebVoiceConf($request->webVoiceConf);
+        }
+        if ($request->avatarUrl) {
+            $meetingParams->setAvatarURL($request->avatarUrl);
+        }
+        if ($request->clientUrl) {
+            $meetingParams->setClientURL($request->clientUrl);
         }
 
         return $meetingParams;
