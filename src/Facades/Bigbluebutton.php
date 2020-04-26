@@ -16,6 +16,14 @@ use Illuminate\Support\Facades\Facade;
  * @method static getRecordings($arrayOtherWiseObject)
  * @method static deleteRecordings($arrayOtherWiseObject)
  * @method static make()
+ * @method static initCreateMeeting(array $array)
+ * @method static initCloseMeeting(array $array)
+ * @method static initJoinMeeting(array $array)
+ * @method static initIsMeetingRunning(array $array)
+ * @method static initGetMeetingInfo(array $array)
+ * @method static initGetRecordings(array $array)
+ * @method static initDeleteRecordings(array $array)
+ * @method static initStart(array $array)
  *
  * @see \JoisarJignesh\Bigbluebutton\Bbb
  */

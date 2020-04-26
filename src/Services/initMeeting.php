@@ -87,6 +87,28 @@ trait initMeeting
             $request->get('lockSettingsLockOnJoinConfigurable', config('bigbluebutton.create.lockSettingsLockOnJoinConfigurable', false))
         );
 
+        if (!is_null($request->get('endCallbackUrl', null))) {
+            $meetingParams->setEndCallbackUrl($request->get('endCallbackUrl', null));
+        }
+
+        $meetingParams->setFreeJoin($request->get('freeJoin', false));
+
+        $presentation = (array) $request->get('presentation', null);
+        foreach ($presentation as $item) {
+            if (isset($item['fileName']) && !empty($item['fileName'])) {
+                if (isset($item['link']) && !empty($item['link'])) {
+                    $meetingParams->addPresentation(trim($item['link']),null,trim($item['fileName']));
+                } elseif (isset($item['content']) && !empty($item['content'])) {
+                     $meetingParams->addPresentation(trim($item['fileName']),trim($item['content']),null);
+                }
+            }
+        }
+
+        $meta = (array) $request->get('meta', null);
+        foreach ($meta as $key => $value) {
+            $meetingParams->addMeta(trim($key), trim($value));
+        }
+
         return $meetingParams;
     }
 
