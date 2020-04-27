@@ -58,12 +58,33 @@ $createMeeting = \Bigbluebutton::initCreateMeeting([
     'meetingID' => 'tamku',
     'meetingName' => 'test meeting',
     'attendeePW' => 'attendee',
-    'moderatorPW' => 'moderator'
+    'moderatorPW' => 'moderator',
 ]);
 
 $createMeeting->setDuration(100); //overwrite default configuration
 \Bigbluebutton::create($createMeeting);
 ``` 
+
+- In create meeting also pass presentation,meta information and endCallbackUrl
+  ```php
+  \Bigbluebutton::create([
+      'meetingID' => 'tamku',
+      'meetingName' => 'test meeting',
+      'attendeePW' => 'attendee',
+      'moderatorPW' => 'moderator',
+      'meta' => [ //must be pass as key and value array
+          ['key' => 'value'],
+          ['key1' => 'value1'],    
+      ],
+      'endCallbackUrl'  => 'www.example.com',
+      'presentation'  => [ //must be array
+          ['link' => 'https://www.example.com/doc.pdf', 'fileName' => 'doc.pdf'], //first will be default and current slide in meeting
+          ['link' => 'https://www.example.com/php_tutorial.pptx', 'fileName' => 'php_tutorial.pptx'],
+      ],
+  ]); 
+  ```  
+    
+ 
 
 - Get meeting info
 ```php
@@ -141,20 +162,33 @@ Bigbluebutton::isMeetingRunning([
 ```php
 \Bigbluebutton::getRecordings([
     'meetingID' => 'tamku',
+    //'meetingID' => ['tamku','xyz'], //pass as array if get multiple recordings 
     //'recordID' => 'a3f1s',
-    // 'state' => true  
+    //'recordID' => ['xyz.1','pqr.1'] //pass as array note :If a recordID is specified, the meetingID is ignored.
+    // 'state' => 'any' // It can be a set of states separate by commas  
+]);
+```
+
+- Publish Recordings
+```php
+\Bigbluebutton::publishRecordings([
+   'recordID' => 'a3f1s',
+    //'recordID' => ['xyz.1','pqr.1'] //pass as array if publish multiple recordings
+   'state' => true //default is true  
 ]);
 ```
 
 - Delete recordings 
 ```php
 \Bigbluebutton::deleteRecordings([
-    'recordID' => 'a3f1s'
+    //'recordID' => 'a3f1s',
+    'recordID' => ['a3f1s','a4ff2'] //pass array if multiple delete recordings
 ]);
 ```
 
 ### More Information Read This [wiki](https://github.com/bigbluebutton/bigbluebutton-api-php/wiki) 
-### For BigBlueServer Api Testing See This [ApiMate](https://mconf.github.io/api-mate/) 
+### For Bigbluebutton Api Testing See This [ApiMate](https://mconf.github.io/api-mate/) 
+### See Bigbluebutton Official dev Api   [Bigbluebutton](https://docs.bigbluebutton.org/dev/api.html) 
 
 ### Changelog
 

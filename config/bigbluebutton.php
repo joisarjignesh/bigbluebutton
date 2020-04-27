@@ -230,7 +230,10 @@ return [
         'guestPolicy'                        => 'ALWAYS_ACCEPT'
     ],
     'join'        => [
-
+        /**
+         *
+         * var @bool
+         */
         'redirect' => true,
 
         /**
@@ -239,5 +242,17 @@ return [
          * var @bool
          */
         'joinViaHtml5' => true
-    ]
+    ],
+    'getRecordings' => [
+    /**
+     * if the recording is [processing|processed|published|unpublished|deleted].
+     * The parameter state can be used to filter results. It can be a set of states separate by commas.
+     * If it is not specified only the states [published|unpublished] are considered
+     * (same as in previous versions). If it is specified as “any”,
+     * recordings in all states are included.
+     *
+     *  var @string
+     */
+    'state' => 'any',//'published,unpublished'
+]
 ];

@@ -11,6 +11,7 @@ use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
+use BigBlueButton\Parameters\PublishRecordingsParameters;
 use JoisarJignesh\Bigbluebutton\Services\initMeeting;
 
 class Bbb
@@ -49,10 +50,10 @@ class Bbb
             if (count($this->response->getRawXml()->meetings->meeting) > 0) {
                 $meetings = [];
                 foreach ($this->response->getRawXml()->meetings->meeting as $meeting) {
-                    $meetings[] = $meeting;
+                    $meetings[] = XmlToArray($meeting);
                 }
 
-                return collect($meetings);
+                return collect(XmlToArray($meetings));
             }
         }
 
@@ -213,22 +214,41 @@ class Bbb
             $recording = $this->initGetRecordings($recording);
         }
 
-        //2265544ef7453eed3114ae608a8501ffec72f6c0-1587228670330
-        //0x8xbjIO4EPMlxhVIZVh
-
-       // dd($recording);
         $this->response = $this->bbb->getRecordings($recording);
-       // dd($this->response);
         if (count($this->response->getRawXml()->recordings->recording) > 0) {
             $recordings = [];
             foreach ($this->response->getRawXml()->recordings->recording as $r) {
-                $recordings[] = $r;
+                $recordings[] = XmlToArray($r);
             }
 
             return collect($recordings);
         }
 
         return collect([]);
+    }
+
+    /**
+     * @param $recording
+     * recordID as string(sepeate by commma)
+     * publish as bool
+     *
+     * @return bool
+     */
+    public function publishRecordings($recording)
+    {
+        if (!$recording instanceof PublishRecordingsParameters) {
+            $recording = $this->initPublishRecordings($recording);
+        }
+
+        $this->response = $this->bbb->publishRecordings($recording);
+        if ($this->response->success()) {
+            $response = XmlToArray($this->response->getRawXml());
+            if (isset($response['published']) && $response['published'] == "true") {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /*

@@ -11,6 +11,7 @@ use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
+use BigBlueButton\Parameters\PublishRecordingsParameters;
 use Illuminate\Support\Str;
 
 trait initMeeting
@@ -93,18 +94,18 @@ trait initMeeting
 
         $meetingParams->setFreeJoin($request->get('freeJoin', false));
 
-        $presentation = (array) $request->get('presentation', null);
+        $presentation = (array)$request->get('presentation', null);
         foreach ($presentation as $item) {
             if (isset($item['fileName']) && !empty($item['fileName'])) {
                 if (isset($item['link']) && !empty($item['link'])) {
-                    $meetingParams->addPresentation(trim($item['link']),null,trim($item['fileName']));
+                    $meetingParams->addPresentation(trim($item['link']), null, trim($item['fileName']));
                 } elseif (isset($item['content']) && !empty($item['content'])) {
-                     $meetingParams->addPresentation(trim($item['fileName']),trim($item['content']),null);
+                    $meetingParams->addPresentation(trim($item['fileName']), trim($item['content']), null);
                 }
             }
         }
 
-        $meta = (array) $request->get('meta', null);
+        $meta = (array)$request->get('meta', null);
         foreach ($meta as $key => $value) {
             $meetingParams->addMeta(trim($key), trim($value));
         }
@@ -181,25 +182,34 @@ trait initMeeting
     }
 
     /*
-     * required fields
-     * meetingID
      *
      * optional fields
+     * meetingID
      * recordID
      * state
      */
     public function initGetRecordings(array $parameters)
     {
         $request = Fluent($parameters);
-
         $recordings = new GetRecordingsParameters();
-        $recordings->setMeetingId($request->meetingID);
-        if ($request->recordID) {
-            $recordings->setRecordId($request->recordID);
-        }
-        if ($request->state) {
-            $recordings->setState($request->state);
-        }
+
+        $recordings->setMeetingId(implode(',', (array) $request->get('meetingID')));
+        $recordings->setRecordId(implode(',', (array) $request->get('recordID')));
+        $recordings->setState($request->get('state', config('bigbluebutton.getRecordings.state')));
+
+        return $recordings;
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return PublishRecordingsParameters
+     */
+    public function initPublishRecordings(array $parameters)
+    {
+        $request = Fluent($parameters);
+        $recordings = new PublishRecordingsParameters(null, $request->get('publish', true));
+        $recordings->setRecordingId(implode(',', (array)$request->get('recordID')));
 
         return $recordings;
     }
@@ -212,7 +222,7 @@ trait initMeeting
     {
         $request = Fluent($recording);
 
-        return (new DeleteRecordingsParameters($request->recordingID));
+        return (new DeleteRecordingsParameters(implode(',', (array)$request->get('recordID'))));
     }
 
     private function makeJoinMeetingArray($object, $parameters)
