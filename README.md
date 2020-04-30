@@ -29,6 +29,11 @@ BBB_SECURITY_SALT=bbb_secret_key
 BBB_SERVER_BASE_URL=https://example.com/bigbluebutton/
 ``` 
  
+ After Define salt and url clear old configurations 
+ ```
+php artisan config:clear
+```
+ 
 - You can create meeting in three ways.
 
 1.By Passing Array

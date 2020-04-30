@@ -29,9 +29,9 @@ trait initMeeting
         $meetingParams = new CreateMeetingParameters($request->meetingID, $request->meetingName);
         $meetingParams->setModeratorPassword($request->get('moderatorPW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
         $meetingParams->setAttendeePassword($request->get('attendeePW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
-        $meetingParams->setDuration($request->get('duration', config('bigbluebutton.create.duration', null)));
+        $meetingParams->setDuration($request->get('duration', config('bigbluebutton.create.duration', 0)));
         $meetingParams->setRecord($request->get('record', config('bigbluebutton.create.record', false)));
-        $meetingParams->setMaxParticipants($request->get('maxParticipants', config('bigbluebutton.create.maxParticipants', null)));
+        $meetingParams->setMaxParticipants($request->get('maxParticipants', config('bigbluebutton.create.maxParticipants', 0)));
         $meetingParams->setLogoutUrl($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)));
         $meetingParams->setWelcomeMessage(
             $request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null))

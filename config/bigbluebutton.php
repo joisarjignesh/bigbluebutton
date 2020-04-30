@@ -2,16 +2,16 @@
 
 
 return [
-    'BBB_SECURITY_SALT'    => env('BBB_SECURITY_SALT', ''),
+    'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', ''),
     'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', ''),
-    'create'      => [
+    'create'              => [
         /**
          * if user does not pass attendee or moderator password then
          * generate random password (length should be there)
          *
          * var @numeric
          */
-        'passwordLength' => 8,
+        'passwordLength'                     => 8,
 
         /**
          * A welcome message that gets displayed on the chat window when the participant joins
@@ -29,10 +29,10 @@ return [
 
         /**
          *    Set the maximum number of users allowed to joined the conference at the same time.
-         *
-         * var @numeric
+         *    Note :  zero means unlimited participants
+         *    var @numeric
          */
-        'maxParticipants'                    => null,
+        'maxParticipants'                    => 0,
 
         /**
          * The URL that the BigBlueButton client will go to after users click the OK button.
@@ -57,10 +57,11 @@ return [
          * The maximum length (in minutes) for the meeting.
          * If duration contains a non-zero value,
          * then when the length of the meeting exceeds the duration value the server will immediately end the meeting
+         * Note :  zero means unlimited participants
          *
          * var @numeric
          */
-        'duration'                           => null,
+        'duration'                           => 0,
 
         /**
          *    Must be set to true to create a breakout room. default set false
@@ -229,30 +230,30 @@ return [
          */
         'guestPolicy'                        => 'ALWAYS_ACCEPT'
     ],
-    'join'        => [
+    'join'                => [
         /**
          *
          * var @bool
          */
-        'redirect' => true,
+        'redirect'     => true,
 
         /**
-         * 	Set to “true” to force the HTML5 client to load for the user.
+         *    Set to “true” to force the HTML5 client to load for the user.
          *
          * var @bool
          */
         'joinViaHtml5' => true
     ],
-    'getRecordings' => [
-    /**
-     * if the recording is [processing|processed|published|unpublished|deleted].
-     * The parameter state can be used to filter results. It can be a set of states separate by commas.
-     * If it is not specified only the states [published|unpublished] are considered
-     * (same as in previous versions). If it is specified as “any”,
-     * recordings in all states are included.
-     *
-     *  var @string
-     */
-    'state' => 'any',//'published,unpublished'
-]
+    'getRecordings'       => [
+        /**
+         * if the recording is [processing|processed|published|unpublished|deleted].
+         * The parameter state can be used to filter results. It can be a set of states separate by commas.
+         * If it is not specified only the states [published|unpublished] are considered
+         * (same as in previous versions). If it is specified as “any”,
+         * recordings in all states are included.
+         *
+         *  var @string
+         */
+        'state' => 'any',//'published,unpublished'
+    ]
 ];
