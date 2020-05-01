@@ -1,8 +1,6 @@
 <?php
 
 namespace JoisarJignesh\Bigbluebutton;
-
-use BigBlueButton\BigBlueButton;
 use Illuminate\Support\ServiceProvider;
 
 class BigbluebuttonServiceProvider extends ServiceProvider
@@ -29,11 +27,8 @@ class BigbluebuttonServiceProvider extends ServiceProvider
         $server_base_url = $this->app['config']->get('bigbluebutton.BBB_SERVER_BASE_URL');
         $server_salt = $this->app['config']->get('bigbluebutton.BBB_SECURITY_SALT');
 
-        putenv("BBB_SERVER_BASE_URL=$server_base_url");
-        putenv("BBB_SECURITY_SALT=$server_salt");
-
         $this->app->singleton('Bigbluebutton', function () {
-            return new Bbb(new BigBlueButton());
+            return new Bbb(new BigBlueButton($server_base_url,$server_salt));
         });
     }
 }
