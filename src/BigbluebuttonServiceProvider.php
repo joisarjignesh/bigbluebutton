@@ -1,6 +1,7 @@
 <?php
 
 namespace JoisarJignesh\Bigbluebutton;
+
 use Illuminate\Support\ServiceProvider;
 
 class BigbluebuttonServiceProvider extends ServiceProvider
@@ -12,7 +13,7 @@ class BigbluebuttonServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/bigbluebutton.php' => config_path('bigbluebutton.php'),
+                __DIR__ . '/../config/bigbluebutton.php' => config_path('bigbluebutton.php'),
             ], 'bigbluebutton-config');
         }
     }
@@ -22,13 +23,15 @@ class BigbluebuttonServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/bigbluebutton.php', 'bigbluebutton');
-
-        $server_base_url = $this->app['config']->get('bigbluebutton.BBB_SERVER_BASE_URL');
-        $server_salt = $this->app['config']->get('bigbluebutton.BBB_SECURITY_SALT');
+        $this->mergeConfigFrom(__DIR__ . '/../config/bigbluebutton.php', 'bigbluebutton');
 
         $this->app->singleton('Bigbluebutton', function () {
-            return new Bbb(new BigBlueButton($server_base_url,$server_salt));
+            return new Bbb(
+                new Bigbluebutton(
+                    $this->app['config']->get('bigbluebutton.BBB_SERVER_BASE_URL'),
+                    $this->app['config']->get('bigbluebutton.BBB_SECURITY_SALT')
+                )
+            );
         });
     }
 }
