@@ -12,6 +12,8 @@ use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
+use BigBlueButton\Parameters\SetConfigXMLParameters;
+use Illuminate\Support\Fluent;
 use Illuminate\Support\Str;
 
 trait initMeeting
@@ -265,5 +267,23 @@ trait initMeeting
         }
     }
 
+    /**
+     * @param $parameters
+     *
+     * @return SetConfigXMLParameters
+     */
+    public function initSetConfigXml(array $parameters)
+    {
+        $parameters = Fluent($parameters);
+        $configXml = new SetConfigXMLParameters($parameters->get('meetingID'));
+        $rawXml = $parameters->xml;
+        if(!$parameters->xml instanceof \SimpleXMLElement) {
+            $rawXml = new \SimpleXMLElement($parameters->xml);
+        }
+
+        $configXml->setRawXml($rawXml);
+
+        return $configXml;
+    }
 
 }

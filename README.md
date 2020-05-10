@@ -191,6 +191,27 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
+- Set config xml
+```php
+\Bigbluebutton::setConfigXml([
+  //'xml'       => new \SimpleXMLElement('<config><modules><localeversion supressWarning="false">0.9.0</localeversion></modules></config>'),
+  'xml'       => '<config><modules><localeversion supressWarning="false">0.9.0</localeversion></modules></config>', 
+   //pass as string other wise pass as SimpleXmlElement object like above line
+  'meetingID' => 'tamku'
+]);
+```
+
+- Get default config xml
+```php
+\Bigbluebutton::getDefaultConfigXml(); //return as xml
+//dd(XmlToArray($this->bbb->getDefaultConfigXML()->getRawXml())); //return as array 
+```
+
+- Get api version
+```php
+dd(\Bigbluebutton::getApiVersion()); //return as collection 
+```
+
 ### More Information Read This [wiki](https://github.com/bigbluebutton/bigbluebutton-api-php/wiki) 
 ### For Bigbluebutton Api Testing See This [ApiMate](https://mconf.github.io/api-mate/) 
 ### See Bigbluebutton Official dev Api   [Bigbluebutton](https://docs.bigbluebutton.org/dev/api.html) 

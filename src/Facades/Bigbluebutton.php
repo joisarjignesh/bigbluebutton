@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static initDeleteRecordings(array $array)
  * @method static initStart(array $array)
  * @method static initPublishRecordings(array $array)
+ * @method static setConfigXml($arrayOtherWiseObject)
+ * @method static getApiVersion()
+ * @method static initSetConfigXml(array $array)
+ * @method static getDefaultConfigXml()
  *
  * @see \JoisarJignesh\Bigbluebutton\Bbb
  */

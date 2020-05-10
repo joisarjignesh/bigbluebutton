@@ -14,9 +14,6 @@ if (!function_exists('XmlToArray')) {
             1
         );
 
-        /* foreach ( (array) $xml as $index => $node )
-             $out[$index] = ( is_object ( $node ) ) ? XmlToArray ( $node ) : $node;*/
-
         return $out;
     }
 }

@@ -12,12 +12,16 @@ use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
+use BigBlueButton\Parameters\SetConfigXMLParameters;
 use JoisarJignesh\Bigbluebutton\Services\initMeeting;
 
 class Bbb
 {
     use initMeeting;
 
+    /**
+     * @var
+     */
     private $response;
     /**
      * @var BigBlueButton
@@ -25,14 +29,18 @@ class Bbb
     protected $bbb;
 
 
+    /**
+     * Bbb constructor.
+     *
+     * @param BigBlueButton $bbb
+     */
     public function __construct(BigBlueButton $bbb)
     {
         $this->bbb = $bbb;
     }
 
-    /*
-     * return BigBlueButton\BigBlueButton
-     * return BigBlueButton Class of Api class
+    /**
+     * @return BigBlueButton
      */
     public function make()
     {
@@ -160,14 +168,18 @@ class Bbb
         return collect([]);
     }
 
-    /*
-         * required fields
-         * meetingID
-         * meetingName
-         * userName
-         * attendeePW
-         * moderatorPW
-         */
+    /**
+     * @param $parameters
+     *
+     *  required fields
+     * meetingID
+     * meetingName
+     * userName
+     * attendeePW
+     * moderatorPW
+     *
+     * @return mixed
+     */
     public function start($parameters)
     {
         return $this->initStart($parameters);
@@ -251,9 +263,13 @@ class Bbb
         return false;
     }
 
-    /*
+    /**
+     * @param $recording
+     *
      * required fields
      * recordingID
+     *
+     * @return \Illuminate\Support\Collection
      */
     public function deleteRecordings($recording)
     {
@@ -264,5 +280,40 @@ class Bbb
         $this->response = $this->bbb->deleteRecordings($recording);
         return collect(XmlToArray($this->response->getRawXml()));
     }
+
+    /**
+     * @param $configXml
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function setConfigXml($configXml)
+    {
+        if(!$configXml instanceof SetConfigXMLParameters){
+            $configXml = $this->initSetConfigXml($configXml);
+        }
+
+        $this->response = $this->bbb->setConfigXML($configXml);
+        return collect(XmlToArray($this->response->getRawXml()));
+    }
+
+    /**
+     * @return \BigBlueButton\Responses\GetDefaultConfigXMLResponse
+     */
+    public function getDefaultConfigXml()
+    {
+        $this->response = $this->bbb->getDefaultConfigXML();
+        return $this->response;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getApiVersion()
+    {
+        $this->response = $this->bbb->getApiVersion();
+        return collect(XmlToArray($this->response->getRawXml()));
+    }
+
+
 
 }
