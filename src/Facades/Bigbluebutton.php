@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static getApiVersion()
  * @method static initSetConfigXml(array $array)
  * @method static getDefaultConfigXml()
+ * @method static hooksCreate(array $array)
  *
  * @see \JoisarJignesh\Bigbluebutton\Bbb
  */

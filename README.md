@@ -212,6 +212,14 @@ Bigbluebutton::isMeetingRunning([
 dd(\Bigbluebutton::getApiVersion()); //return as collection 
 ```
 
+- Hooks Create
+```php 
+dd(Bigbluebutton::hooksCreate([
+      'callbackURL' => 'example.test', //required
+      'meetingID' => 'tamku', //optional  if not set then hooks set for all meeting id
+      'getRaw' => true //optional
+]));
+```
 ### More Information Read This [wiki](https://github.com/bigbluebutton/bigbluebutton-api-php/wiki) 
 ### For Bigbluebutton Api Testing See This [ApiMate](https://mconf.github.io/api-mate/) 
 ### See Bigbluebutton Official dev Api   [Bigbluebutton](https://docs.bigbluebutton.org/dev/api.html) 

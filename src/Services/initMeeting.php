@@ -9,6 +9,7 @@ use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
+use BigBlueButton\Parameters\HooksCreateParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
@@ -65,6 +66,7 @@ trait initMeeting
         $meetingParams->setMuteOnStart(
             $request->get('muteOnStart', config('bigbluebutton.create.muteOnStart', false))
         );
+
         $meetingParams->setLockSettingsDisableCam(
             $request->get('lockSettingsDisableCam', config('bigbluebutton.create.lockSettingsDisableCam', false))
         );
@@ -195,8 +197,8 @@ trait initMeeting
         $request = Fluent($parameters);
         $recordings = new GetRecordingsParameters();
 
-        $recordings->setMeetingId(implode(',', (array) $request->get('meetingID')));
-        $recordings->setRecordId(implode(',', (array) $request->get('recordID')));
+        $recordings->setMeetingId(implode(',', (array)$request->get('meetingID')));
+        $recordings->setRecordId(implode(',', (array)$request->get('recordID')));
         $recordings->setState($request->get('state', config('bigbluebutton.getRecordings.state')));
 
         return $recordings;
@@ -277,7 +279,7 @@ trait initMeeting
         $parameters = Fluent($parameters);
         $configXml = new SetConfigXMLParameters($parameters->get('meetingID'));
         $rawXml = $parameters->xml;
-        if(!$parameters->xml instanceof \SimpleXMLElement) {
+        if (!$parameters->xml instanceof \SimpleXMLElement) {
             $rawXml = new \SimpleXMLElement($parameters->xml);
         }
 
@@ -286,4 +288,20 @@ trait initMeeting
         return $configXml;
     }
 
+    /**
+     * @param array $parameters
+     *
+     * @return HooksCreateParameters
+     */
+    public function initHooksCreate(array $parameters)
+    {
+        $parameters = Fluent($parameters);
+        $hooksCreate = new HooksCreateParameters($parameters->get('callbackURL'));
+        if ($parameters->meetingID) {
+            $hooksCreate->setMeetingId($parameters->meetingID);
+        }
+        $hooksCreate->setGetRaw($parameters->get('getRaw', false));
+
+        return $hooksCreate;
+    }
 }

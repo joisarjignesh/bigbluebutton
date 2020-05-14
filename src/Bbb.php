@@ -9,6 +9,7 @@ use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
+use BigBlueButton\Parameters\HooksCreateParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
@@ -314,6 +315,20 @@ class Bbb
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
+    /**
+     * @param $hooks
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function hooksCreate($hooks)
+    {
+        if(!$hooks instanceof HooksCreateParameters){
+            $hooks = $this->initHooksCreate($hooks);
+        }
+
+        $this->response = $this->bbb->hooksCreate($hooks);
+        return collect(XmlToArray($this->response->getRawXml()));
+    }
 
 
 }
