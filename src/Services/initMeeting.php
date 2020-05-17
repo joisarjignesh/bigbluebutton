@@ -10,6 +10,7 @@ use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetMeetingInfoParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\HooksCreateParameters;
+use BigBlueButton\Parameters\HooksDestroyParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
@@ -303,5 +304,17 @@ trait initMeeting
         $hooksCreate->setGetRaw($parameters->get('getRaw', false));
 
         return $hooksCreate;
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return HooksDestroyParameters
+     */
+    public function initHooksDestroy(array $parameters)
+    {
+        $parameters = Fluent($parameters);
+        $hooksDestroy = new HooksDestroyParameters($parameters->get('hooksID'));
+        return $hooksDestroy;
     }
 }
