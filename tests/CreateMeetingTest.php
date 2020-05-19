@@ -22,7 +22,13 @@ class CreateMeetingTest extends TestCase
     /** @test */
     public function true_is_true()
     {
-        $array = [1];
-        $this->assertCount(1, $array);
+      /*  Bigbluebutton::create([
+            'meetingID'   => 'tamku',
+            'meetingName' => 'test meeting',
+            'attendeePW'  => 'attendee',
+            'moderatorPW' => 'moderator',
+        ]);*/
+         $array = [1];
+         $this->assertCount(1, $array);
     }
 }

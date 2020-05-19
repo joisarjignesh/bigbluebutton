@@ -34,7 +34,7 @@ BBB_SERVER_BASE_URL=https://example.com/bigbluebutton/
 php artisan config:clear
 ```
  
-- You can create meeting in three ways.
+- You can create meeting in three ways [document](https://docs.bigbluebutton.org/dev/api.html#create)
 
 1.By Passing Array
 ```php
@@ -70,7 +70,9 @@ $createMeeting->setDuration(100); //overwrite default configuration
 \Bigbluebutton::create($createMeeting);
 ``` 
 
-- In create meeting also pass presentation,meta information and endCallbackUrl
+- In create meeting also pass [presentation](https://docs.bigbluebutton.org/dev/api.html#pre-upload-slides) , meta
+ information
+ and [endCallbackUrl](https://docs.bigbluebutton.org/dev/api.html#end-meeting-callback-url)
   ```php
   \Bigbluebutton::create([
       'meetingID' => 'tamku',
@@ -91,7 +93,7 @@ $createMeeting->setDuration(100); //overwrite default configuration
     
  
 
-- Get meeting info
+- Get meeting info [document](https://docs.bigbluebutton.org/dev/api.html#getmeetinginfo)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
@@ -102,7 +104,7 @@ Bigbluebutton::getMeetingInfo([
 ```
 
 
-- Join meeting ( by default it will redirect into BigBlueButton Server And Join Meeting)
+- Join meeting ( by default it will redirect into BigBlueButton Server And Join Meeting) [document](https://docs.bigbluebutton.org/dev/api.html#join)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
@@ -126,7 +128,7 @@ return response()->to(
 ```
 
 
-- Close meeting
+- Close meeting [document](https://docs.bigbluebutton.org/dev/api.html#end)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
@@ -136,7 +138,7 @@ Bigbluebutton::close([
 ]);
 ```
 
-- Start metting (if will check first meeting is there or not if not then create meeting and join meeting else meeting
+- Start meeting (if will check first meeting is there or not if not then create meeting and join meeting else meeting
  is there then it directly join a meeting user join as moderator)
  ```php
  $url = \Bigbluebutton::start([
@@ -150,20 +152,20 @@ Bigbluebutton::close([
 return response()->to($url);
  ```
  
-- Get all meetings  
+- Get all meetings  [document](https://docs.bigbluebutton.org/dev/api.html#getmeetings)
 ```php
 \Bigbluebutton::all();
 ```
 
 
-- Is meeting running
+- Is meeting running [document](https://docs.bigbluebutton.org/dev/api.html#ismeetingrunning)
 ```php
 Bigbluebutton::isMeetingRunning([
     'meetingID' => 'tamku',
 ]);
 ```
 
-- Get recordings 
+- Get recordings [document](https://docs.bigbluebutton.org/dev/api.html#getrecordings)
 ```php
 \Bigbluebutton::getRecordings([
     'meetingID' => 'tamku',
@@ -174,7 +176,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
-- Publish Recordings
+- Publish Recordings [document](https://docs.bigbluebutton.org/dev/api.html#publishrecordings)
 ```php
 \Bigbluebutton::publishRecordings([
    'recordID' => 'a3f1s',
@@ -183,7 +185,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
-- Delete recordings 
+- Delete recordings [document](https://docs.bigbluebutton.org/dev/api.html#deleterecordings)
 ```php
 \Bigbluebutton::deleteRecordings([
     //'recordID' => 'a3f1s',
@@ -191,7 +193,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
-- Set config xml
+- Set config xml [document](https://docs.bigbluebutton.org/dev/api.html#setconfigxml)
 ```php
 \Bigbluebutton::setConfigXml([
   //'xml'       => new \SimpleXMLElement('<config><modules><localeversion supressWarning="false">0.9.0</localeversion></modules></config>'),
@@ -201,7 +203,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
-- Get default config xml
+- Get default config xml [document](https://docs.bigbluebutton.org/dev/api.html#getdefaultconfigxml)
 ```php
 \Bigbluebutton::getDefaultConfigXml(); //return as xml
 //dd(XmlToArray($this->bbb->getDefaultConfigXML()->getRawXml())); //return as array 
@@ -212,7 +214,7 @@ Bigbluebutton::isMeetingRunning([
 dd(\Bigbluebutton::getApiVersion()); //return as collection 
 ```
 
-- Hooks Create
+- Hooks Create [document](https://docs.bigbluebutton.org/dev/webhooks.html#hookscreate)
 ```php 
 dd(Bigbluebutton::hooksCreate([
       'callbackURL' => 'example.test', //required
@@ -221,7 +223,7 @@ dd(Bigbluebutton::hooksCreate([
 ]));
 ```
 
-- Hooks Destroy 
+- Hooks Destroy [document](https://docs.bigbluebutton.org/dev/webhooks.html#hooksdestroy)
 ```php 
 dd(Bigbluebutton::hooksDestroy([
      'hooksID' => 33
