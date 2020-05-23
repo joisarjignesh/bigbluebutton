@@ -7,6 +7,35 @@
 ![Laravel Framework](https://img.shields.io/badge/laravel-%3E%3D5.5-blue)
 
 Package that provides easily communicate between BigBlueButton server and laravel framework
+
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Usage](#usage)
+* [Api](#Api)
+    * [Meeting](#meeting)
+        * [Create a meeting](#create-a-meeting)
+        * [Join a meeting](#join-a-meeting)
+        * [Get a list of meetings](#get-a-list-of-meetings)
+        * [Get meeting info](#get-meeting-info)
+        * [Is a meeting running?](#is-a-meeting-running)
+        * [Close a meeting](#close-a-meeting)
+     * [Recording](#recording)
+        * [Get recordings](#get-recordings)
+        * [Publish recordings](#publish-recordings)
+        * [Delete recordings](#delete-recordings)
+     * [Config Xml](#config-xml)
+        * [Get default config](#get-default-config-xml)
+        * [Set config](#set-config-xml)
+     * [Hooks](#hooks)
+       * [Create Hooks](#hooks-create)
+       * [Destroy Hooks](#hooks-destroy)
+     * [Other](#other)
+        * [Get API version](#get-api-version)   
+     * [Unofficial](#unofficial)
+        * [Start a meeting](#start-a-meeting)   
+
+
+
 ## Requirements
 - Laravel 5.5 or above.
 
@@ -33,7 +62,9 @@ BBB_SERVER_BASE_URL=https://example.com/bigbluebutton/
  ```
 php artisan config:clear
 ```
- 
+ ##Api
+ ###Meeting
+ ####Create a meeting
 - You can create meeting in three ways [document](https://docs.bigbluebutton.org/dev/api.html#create)
 
 1.By Passing Array
@@ -90,21 +121,8 @@ $createMeeting->setDuration(100); //overwrite default configuration
       ],
   ]); 
   ```  
-    
- 
-
-- Get meeting info [document](https://docs.bigbluebutton.org/dev/api.html#getmeetinginfo)
-```php
-use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
-
-Bigbluebutton::getMeetingInfo([
-    'meetingID' => 'tamku',
-    'moderatorPW' => 'moderator' //moderator password set here
-]);
-```
-
-
-- Join meeting ( by default it will redirect into BigBlueButton Server And Join Meeting) [document](https://docs.bigbluebutton.org/dev/api.html#join)
+####Join a meeting    
+ - Join meeting ( by default it will redirect into BigBlueButton Server And Join Meeting) [document](https://docs.bigbluebutton.org/dev/api.html#join)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
@@ -127,7 +145,32 @@ return response()->to(
 ]);
 ```
 
+####Get a list of meetings
+- Get all meetings  [document](https://docs.bigbluebutton.org/dev/api.html#getmeetings)
+```php
+\Bigbluebutton::all();
+```
 
+####Get meeting info
+- Get meeting info [document](https://docs.bigbluebutton.org/dev/api.html#getmeetinginfo)
+```php
+use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
+
+Bigbluebutton::getMeetingInfo([
+    'meetingID' => 'tamku',
+    'moderatorPW' => 'moderator' //moderator password set here
+]);
+```
+
+####Is a meeting running
+- Is meeting running [document](https://docs.bigbluebutton.org/dev/api.html#ismeetingrunning)
+```php
+Bigbluebutton::isMeetingRunning([
+    'meetingID' => 'tamku',
+]);
+```
+
+####Close a meeting
 - Close meeting [document](https://docs.bigbluebutton.org/dev/api.html#end)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
@@ -138,33 +181,8 @@ Bigbluebutton::close([
 ]);
 ```
 
-- Start meeting (if will check first meeting is there or not if not then create meeting and join meeting else meeting
- is there then it directly join a meeting user join as moderator)
- ```php
- $url = \Bigbluebutton::start([
-     'meetingID' => 'tamku',
-     'moderatorPW' => 'moderator', //moderator password set here
-     'attendeePW' => 'attendee', //attendee password here
-     'userName' => 'John Deo',//for join meeting 
-     //'redirect' => false // only want to create and meeting and get join url then use this parameter 
- ]);
-
-return response()->to($url);
- ```
- 
-- Get all meetings  [document](https://docs.bigbluebutton.org/dev/api.html#getmeetings)
-```php
-\Bigbluebutton::all();
-```
-
-
-- Is meeting running [document](https://docs.bigbluebutton.org/dev/api.html#ismeetingrunning)
-```php
-Bigbluebutton::isMeetingRunning([
-    'meetingID' => 'tamku',
-]);
-```
-
+###Recording
+###Get recordings
 - Get recordings [document](https://docs.bigbluebutton.org/dev/api.html#getrecordings)
 ```php
 \Bigbluebutton::getRecordings([
@@ -176,6 +194,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
+###Publish recordings
 - Publish Recordings [document](https://docs.bigbluebutton.org/dev/api.html#publishrecordings)
 ```php
 \Bigbluebutton::publishRecordings([
@@ -185,6 +204,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
+####Delete recordings
 - Delete recordings [document](https://docs.bigbluebutton.org/dev/api.html#deleterecordings)
 ```php
 \Bigbluebutton::deleteRecordings([
@@ -193,6 +213,16 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
+###Config xml
+#####Get default config xml
+- Get default config xml [document](https://docs.bigbluebutton.org/dev/api.html#getdefaultconfigxml)
+```php
+\Bigbluebutton::getDefaultConfigXml(); //return as xml
+//dd(XmlToArray($this->bbb->getDefaultConfigXML()->getRawXml())); //return as array 
+```
+
+
+####Set config xml 
 - Set config xml [document](https://docs.bigbluebutton.org/dev/api.html#setconfigxml)
 ```php
 \Bigbluebutton::setConfigXml([
@@ -203,17 +233,8 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
-- Get default config xml [document](https://docs.bigbluebutton.org/dev/api.html#getdefaultconfigxml)
-```php
-\Bigbluebutton::getDefaultConfigXml(); //return as xml
-//dd(XmlToArray($this->bbb->getDefaultConfigXML()->getRawXml())); //return as array 
-```
-
-- Get api version
-```php
-dd(\Bigbluebutton::getApiVersion()); //return as collection 
-```
-
+###Hooks
+####Hooks create
 - Hooks Create [document](https://docs.bigbluebutton.org/dev/webhooks.html#hookscreate)
 ```php 
 dd(Bigbluebutton::hooksCreate([
@@ -223,12 +244,36 @@ dd(Bigbluebutton::hooksCreate([
 ]));
 ```
 
+####Hooks destroy
 - Hooks Destroy [document](https://docs.bigbluebutton.org/dev/webhooks.html#hooksdestroy)
 ```php 
 dd(Bigbluebutton::hooksDestroy([
      'hooksID' => 33
 ]));
 ```
+
+##Other
+####Get api version
+- Get api version
+```php
+dd(\Bigbluebutton::getApiVersion()); //return as collection 
+```
+
+###Unofficial
+####Start a meeting 
+- Start meeting (first check meeting is exists or not if not then create a meeting and join a meeting otherwise
+  meeting is exists then it will directly join a meeting) (by default user join as moderator)
+ ```php
+ $url = \Bigbluebutton::start([
+     'meetingID' => 'tamku',
+     'moderatorPW' => 'moderator', //moderator password set here
+     'attendeePW' => 'attendee', //attendee password here
+     'userName' => 'John Deo',//for join meeting 
+     //'redirect' => false // only want to create and meeting and get join url then use this parameter 
+ ]);
+
+return response()->to($url);
+ ```
 
 ### More Information Read This [wiki](https://github.com/bigbluebutton/bigbluebutton-api-php/wiki) 
 ### For Bigbluebutton Api Testing See This [ApiMate](https://mconf.github.io/api-mate/) 
