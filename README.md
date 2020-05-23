@@ -62,9 +62,9 @@ BBB_SERVER_BASE_URL=https://example.com/bigbluebutton/
  ```
 php artisan config:clear
 ```
- ##Api
- ###Meeting
- ####Create a meeting
+ ## Api
+ ### Meeting
+ #### Create a meeting
 - You can create meeting in three ways [document](https://docs.bigbluebutton.org/dev/api.html#create)
 
 1.By Passing Array
@@ -121,7 +121,7 @@ $createMeeting->setDuration(100); //overwrite default configuration
       ],
   ]); 
   ```  
-####Join a meeting    
+#### Join a meeting    
  - Join meeting ( by default it will redirect into BigBlueButton Server And Join Meeting) [document](https://docs.bigbluebutton.org/dev/api.html#join)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
@@ -145,13 +145,13 @@ return response()->to(
 ]);
 ```
 
-####Get a list of meetings
+#### Get a list of meetings
 - Get all meetings  [document](https://docs.bigbluebutton.org/dev/api.html#getmeetings)
 ```php
 \Bigbluebutton::all();
 ```
 
-####Get meeting info
+#### Get meeting info
 - Get meeting info [document](https://docs.bigbluebutton.org/dev/api.html#getmeetinginfo)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
@@ -162,7 +162,7 @@ Bigbluebutton::getMeetingInfo([
 ]);
 ```
 
-####Is a meeting running
+#### Is a meeting running
 - Is meeting running [document](https://docs.bigbluebutton.org/dev/api.html#ismeetingrunning)
 ```php
 Bigbluebutton::isMeetingRunning([
@@ -170,7 +170,7 @@ Bigbluebutton::isMeetingRunning([
 ]);
 ```
 
-####Close a meeting
+#### Close a meeting
 - Close meeting [document](https://docs.bigbluebutton.org/dev/api.html#end)
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
@@ -181,8 +181,8 @@ Bigbluebutton::close([
 ]);
 ```
 
-###Recording
-###Get recordings
+### Recording
+#### Get recordings
 - Get recordings [document](https://docs.bigbluebutton.org/dev/api.html#getrecordings)
 ```php
 \Bigbluebutton::getRecordings([
@@ -194,7 +194,7 @@ Bigbluebutton::close([
 ]);
 ```
 
-###Publish recordings
+#### Publish recordings
 - Publish Recordings [document](https://docs.bigbluebutton.org/dev/api.html#publishrecordings)
 ```php
 \Bigbluebutton::publishRecordings([
@@ -204,7 +204,7 @@ Bigbluebutton::close([
 ]);
 ```
 
-####Delete recordings
+#### Delete recordings
 - Delete recordings [document](https://docs.bigbluebutton.org/dev/api.html#deleterecordings)
 ```php
 \Bigbluebutton::deleteRecordings([
@@ -213,8 +213,8 @@ Bigbluebutton::close([
 ]);
 ```
 
-###Config xml
-#####Get default config xml
+### Config xml
+##### Get default config xml
 - Get default config xml [document](https://docs.bigbluebutton.org/dev/api.html#getdefaultconfigxml)
 ```php
 \Bigbluebutton::getDefaultConfigXml(); //return as xml
@@ -222,7 +222,7 @@ Bigbluebutton::close([
 ```
 
 
-####Set config xml 
+#### Set config xml 
 - Set config xml [document](https://docs.bigbluebutton.org/dev/api.html#setconfigxml)
 ```php
 \Bigbluebutton::setConfigXml([
@@ -233,8 +233,8 @@ Bigbluebutton::close([
 ]);
 ```
 
-###Hooks
-####Hooks create
+### Hooks
+#### Hooks create
 - Hooks Create [document](https://docs.bigbluebutton.org/dev/webhooks.html#hookscreate)
 ```php 
 dd(Bigbluebutton::hooksCreate([
@@ -244,7 +244,7 @@ dd(Bigbluebutton::hooksCreate([
 ]));
 ```
 
-####Hooks destroy
+#### Hooks destroy
 - Hooks Destroy [document](https://docs.bigbluebutton.org/dev/webhooks.html#hooksdestroy)
 ```php 
 dd(Bigbluebutton::hooksDestroy([
@@ -252,15 +252,15 @@ dd(Bigbluebutton::hooksDestroy([
 ]));
 ```
 
-##Other
-####Get api version
+### Other
+#### Get api version
 - Get api version
 ```php
 dd(\Bigbluebutton::getApiVersion()); //return as collection 
 ```
 
-###Unofficial
-####Start a meeting 
+### Unofficial
+#### Start a meeting 
 - Start meeting (first check meeting is exists or not if not then create a meeting and join a meeting otherwise
   meeting is exists then it will directly join a meeting) (by default user join as moderator)
  ```php
