@@ -14,6 +14,9 @@ Package that provides easily communicate between BigBlueButton server and larave
 * [Api](#Api)
     * [Meeting](#meeting)
         * [Create a meeting](#create-a-meeting)
+          * [Upload slides](#upload-slides)
+          * [End meeting callback url](#end-meeting-callback-url)
+          * [Recording ready callback URL](#recording-ready-callback-url)
         * [Join a meeting](#join-a-meeting)
         * [Get a list of meetings](#get-a-list-of-meetings)
         * [Get meeting info](#get-meeting-info)
@@ -101,26 +104,47 @@ $createMeeting->setDuration(100); //overwrite default configuration
 \Bigbluebutton::create($createMeeting);
 ``` 
 
-- In create meeting also pass [presentation](https://docs.bigbluebutton.org/dev/api.html#pre-upload-slides) , meta
- information
- and [endCallbackUrl](https://docs.bigbluebutton.org/dev/api.html#end-meeting-callback-url)
+##### Upload slides 
+- You can upload slides within the create a meeting call. If you do this, the BigBlueButton server will immediately
+ download  and process the [slides](https://docs.bigbluebutton.org/dev/api.html#pre-upload-slides) 
   ```php
   \Bigbluebutton::create([
       'meetingID' => 'tamku',
       'meetingName' => 'test meeting',
       'attendeePW' => 'attendee',
       'moderatorPW' => 'moderator',
-      'meta' => [ //must be pass as key and value array
-          ['key' => 'value'],
-          ['key1' => 'value1'],    
-      ],
-      'endCallbackUrl'  => 'www.example.com',
       'presentation'  => [ //must be array
           ['link' => 'https://www.example.com/doc.pdf', 'fileName' => 'doc.pdf'], //first will be default and current slide in meeting
           ['link' => 'https://www.example.com/php_tutorial.pptx', 'fileName' => 'php_tutorial.pptx'],
       ],
   ]); 
   ```  
+  
+##### End meeting callback [URL](https://docs.bigbluebutton.org/dev/api.html#end-meeting-callback-url)
+- You can ask the BigBlueButton server to make a callback to your application when the meeting ends. Upon receiving
+ the callback your application could, for example, change the interface for the user to hide the ‘join’ button.
+ ```php
+\Bigbluebutton::create([
+    'meetingID' => 'tamku',
+    'meetingName' => 'test meeting',
+    'attendeePW' => 'attendee',
+    'moderatorPW' => 'moderator',
+    'endCallbackUrl'  => 'www.example.com/callback',
+]); 
+```
+
+##### Recording ready callback [URL](https://docs.bigbluebutton.org/dev/api.html#recording-ready-callback-url) 
+- You can ask the BigBlueButton server to make a callback to your application when the recording for a meeting is ready for viewing. Upon receiving the callback your application could, for example, send the presenter an e-mail to notify them that their recording is ready
+ ```php
+\Bigbluebutton::create([
+    'meetingID' => 'tamku',
+    'meetingName' => 'test meeting',
+    'attendeePW' => 'attendee',
+    'moderatorPW' => 'moderator',
+    'bbb-recording-ready-url'  => 'https://example.com/api/v1/recording_status',
+]); 
+```
+
 #### Join a meeting    
  - Join meeting ( by default it will redirect into BigBlueButton Server And Join Meeting) [document](https://docs.bigbluebutton.org/dev/api.html#join)
 ```php

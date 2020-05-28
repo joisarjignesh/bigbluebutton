@@ -1,12 +1,16 @@
 {
     "name": "joisarjignesh/bigbluebutton",
-    "description": "Bigbluebutton integration in laravel",
+    "description": "BigBlueButton Server API Library for Laravel",
     "keywords": [
         "joisarjignesh",
         "bigbluebutton",
         "api",
         "bbb",
-        "meeting"
+        "meeting",
+        "package",
+        "laravel-package",
+        "laravel",
+        "php"
     ],
     "homepage": "https://github.com/joisarjignesh/bigbluebutton",
     "license": "MIT",
@@ -52,7 +56,8 @@
     "prefer-stable": true,
     "support": {
         "source": "https://github.com/joisarjignesh/bigbluebutton",
-        "issues": "https://github.com/joisarjignesh/bigbluebutton/issues"
+        "issues": "https://github.com/joisarjignesh/bigbluebutton/issues",
+        "docs": "https://github.com/joisarjignesh/bigbluebutton/blob/master/README.md"
     },
     "extra": {
         "laravel": {

@@ -97,6 +97,10 @@ trait initMeeting
             $meetingParams->setEndCallbackUrl($request->get('endCallbackUrl', null));
         }
 
+        if (!is_null($request->get('bbb-recording-ready-url', null))) {
+            $meetingParams->setRecordingReadyCallbackUrl($request->get('bbb-recording-ready-url', null));
+        }
+
         $meetingParams->setFreeJoin($request->get('freeJoin', false));
 
         $presentation = (array)$request->get('presentation', null);
@@ -315,6 +319,7 @@ trait initMeeting
     {
         $parameters = Fluent($parameters);
         $hooksDestroy = new HooksDestroyParameters($parameters->get('hooksID'));
+
         return $hooksDestroy;
     }
 }

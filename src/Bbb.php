@@ -48,6 +48,7 @@ class Bbb
     {
         return $this->bbb;
     }
+
     /**
      *  Return a list of all meetings
      *
@@ -220,6 +221,7 @@ class Bbb
      * optional fields
      * recordID
      * state
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getRecordings($recording)
@@ -280,6 +282,7 @@ class Bbb
         }
 
         $this->response = $this->bbb->deleteRecordings($recording);
+
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
@@ -290,11 +293,12 @@ class Bbb
      */
     public function setConfigXml($configXml)
     {
-        if(!$configXml instanceof SetConfigXMLParameters){
+        if (!$configXml instanceof SetConfigXMLParameters) {
             $configXml = $this->initSetConfigXml($configXml);
         }
 
         $this->response = $this->bbb->setConfigXML($configXml);
+
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
@@ -304,6 +308,7 @@ class Bbb
     public function getDefaultConfigXml()
     {
         $this->response = $this->bbb->getDefaultConfigXML();
+
         return $this->response;
     }
 
@@ -313,6 +318,7 @@ class Bbb
     public function getApiVersion()
     {
         $this->response = $this->bbb->getApiVersion();
+
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
@@ -323,11 +329,12 @@ class Bbb
      */
     public function hooksCreate($hooks)
     {
-        if(!$hooks instanceof HooksCreateParameters){
+        if (!$hooks instanceof HooksCreateParameters) {
             $hooks = $this->initHooksCreate($hooks);
         }
 
         $this->response = $this->bbb->hooksCreate($hooks);
+
         return collect(XmlToArray($this->response->getRawXml()));
     }
 
@@ -338,12 +345,13 @@ class Bbb
      */
     public function hooksDestroy($hooks)
     {
-        if(!$hooks instanceof HooksDestroyParameters) {
+        if (!$hooks instanceof HooksDestroyParameters) {
             $hooks = $this->initHooksDestroy($hooks);
         }
 
         $this->response = $this->bbb->hooksDestroy($hooks);
-        return  collect(XmlToArray($this->response->getRawXml()));
-     }
+
+        return collect(XmlToArray($this->response->getRawXml()));
+    }
 
 }
