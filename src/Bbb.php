@@ -50,6 +50,20 @@ class Bbb
     }
 
     /**
+     * check url and secret is working
+     * @return bool
+     */
+    public function isConnect()
+    {
+        $response = $this->initIsConnect();
+        if($response['flag'] === true){
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      *  Return a list of all meetings
      *
      * @return \Illuminate\Support\Collection

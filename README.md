@@ -12,6 +12,7 @@ Package that provides easily communicate between BigBlueButton server and larave
 * [Installation](#installation)
 * [Usage](#usage)
 * [Api](#Api)
+    * [Check a url and secret working](#check-a-url-and-secret-working)
     * [Meeting](#meeting)
         * [Create a meeting](#create-a-meeting)
           * [Upload slides](#upload-slides)
@@ -66,6 +67,12 @@ BBB_SERVER_BASE_URL=https://example.com/bigbluebutton/
 php artisan config:clear
 ```
  ## Api
+ 
+ ### Check a url and secret working
+```php
+dd(\Bigbluebutton::isConnect());
+```
+ 
  ### Meeting
  #### Create a meeting
 - You can create meeting in three ways [document](https://docs.bigbluebutton.org/dev/api.html#create)
