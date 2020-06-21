@@ -172,9 +172,14 @@ trait initMeeting
      */
     public function initIsMeetingRunning(array $parameters)
     {
-        $request = Fluent($parameters);
+        $meetingID = "";
+        if (!is_array($parameters)) {
+            $meetingID = $parameters;
+        } else {
+            $meetingID = Fluent($parameters)->get('meetingID');
+        }
 
-        return (new IsMeetingRunningParameters($request->meetingID));
+        return (new IsMeetingRunningParameters($meetingID));
     }
 
     /*

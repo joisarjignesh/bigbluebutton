@@ -199,6 +199,8 @@ Bigbluebutton::getMeetingInfo([
 Bigbluebutton::isMeetingRunning([
     'meetingID' => 'tamku',
 ]);
+
+Bigbluebutton::isMeetingRunning('tamku'); //new way 
 ```
 
 #### Close a meeting
