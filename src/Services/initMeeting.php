@@ -170,7 +170,7 @@ trait initMeeting
      * required fields
      * meetingID
      */
-    public function initIsMeetingRunning(array $parameters)
+    public function initIsMeetingRunning($parameters)
     {
         $meetingID = "";
         if (!is_array($parameters)) {

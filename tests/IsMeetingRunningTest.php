@@ -19,10 +19,13 @@ class IsMeetingRunningTest extends TestCase
         return Bigbluebutton::class;
     }
 
-    /** @test */
-    public function true_is_true()
+    public function testIsMeetingRunningParameters()
     {
-        $array = [1];
-        $this->assertCount(1, $array);
+        $instance = Bigbluebutton::initIsMeetingRunning('tamku');
+        $this->assertInstanceOf(\BigBlueButton\Parameters\IsMeetingRunningParameters::class, $instance);
+
+        $instanceArray = Bigbluebutton::initIsMeetingRunning(['meetingID' => 'tamku']);
+        $this->assertInstanceOf(\BigBlueButton\Parameters\IsMeetingRunningParameters::class, $instanceArray);
+
     }
 }
