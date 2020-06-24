@@ -19,10 +19,16 @@ class CloseMeetingTest extends TestCase
         return Bigbluebutton::class;
     }
 
-    /** @test */
-    public function true_is_true()
+    public function testCloseMeetingParameters()
     {
-        $array = [1];
-        $this->assertCount(1, $array);
+        $meetingId = 'tamku';
+        $password = 'test';
+        $instance = Bigbluebutton::initCloseMeeting(['meetingID' => $meetingId, 'moderatorPW' => $password]);
+        $this->assertInstanceOf(\BigBlueButton\Parameters\EndMeetingParameters::class, $instance);
+
+        $this->assertEquals($meetingId, $instance->getMeetingId());
+        $this->assertEquals($password, $instance->getPassword());
+        $this->assertEquals('meetingID=' . $meetingId . '&password=' . $password, $instance->getHTTPQuery());
+
     }
 }
