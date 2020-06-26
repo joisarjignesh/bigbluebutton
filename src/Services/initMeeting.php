@@ -20,11 +20,17 @@ use Illuminate\Support\Str;
 trait initMeeting
 {
 
-    /*
+    /**
+     * @param array $parameters
+     *
      * required fields
      * meetingID
      * meetingName
+     * optional fields
+     * moderatorPW
+     * attendeePW
      *
+     * @return CreateMeetingParameters
      */
     public function initCreateMeeting(array $parameters)
     {
@@ -121,10 +127,14 @@ trait initMeeting
         return $meetingParams;
     }
 
-    /*
+    /**
+     * @param array $parameters
+     *
      * required fields:
      * meetingID
      * moderatorPW close meeting must be there moderator password
+     *
+     * @return EndMeetingParameters
      */
     public function initCloseMeeting(array $parameters)
     {
@@ -133,12 +143,16 @@ trait initMeeting
         return (new EndMeetingParameters($request->meetingID, $request->moderatorPW));
     }
 
-    /*
+    /**
+     * @param array $parameters
+     *
      *  required fields
      *
      *  meetingID
      *  userName join by name
      *  password which role want to join
+     *
+     * @return JoinMeetingParameters
      */
     public function initJoinMeeting(array $parameters)
     {
@@ -166,42 +180,53 @@ trait initMeeting
         return $meetingParams;
     }
 
-    /*
+    /**
+     * @param $parameters
+     *
      * required fields
      * meetingID
+     *
+     * @return IsMeetingRunningParameters
      */
     public function initIsMeetingRunning($parameters)
     {
         $meetingID = "";
-        if (!is_array($parameters)) {
-            $meetingID = $parameters;
-        } else {
+        if (is_array($parameters)) {
             $meetingID = Fluent($parameters)->get('meetingID');
+        } else {
+            $meetingID = $parameters;
         }
 
-        return (new IsMeetingRunningParameters($meetingID));
+        return new IsMeetingRunningParameters($meetingID);
     }
 
-    /*
+    /**
+     * @param $parameters
+     *
      * required fields
      * meetingID
      * moderatorPW must be there moderator password
+     *
+     * @return GetMeetingInfoParameters
      */
     public function initGetMeetingInfo($parameters)
     {
         $request = Fluent($parameters);
 
-        return (new GetMeetingInfoParameters($request->meetingID, $request->moderatorPW));
+        return new GetMeetingInfoParameters($request->meetingID, $request->moderatorPW);
     }
 
-    /*
+    /**
+     * @param mixed $parameters
      *
      * optional fields
      * meetingID
      * recordID
      * state
+     *
+     * @return GetRecordingsParameters
      */
-    public function initGetRecordings(array $parameters)
+    public function initGetRecordings($parameters)
     {
         $request = Fluent($parameters);
         $recordings = new GetRecordingsParameters();
@@ -214,11 +239,14 @@ trait initMeeting
     }
 
     /**
-     * @param array $parameters
+     * @param mixed $parameters
+     *
+     * required fields
+     * recordID
      *
      * @return PublishRecordingsParameters
      */
-    public function initPublishRecordings(array $parameters)
+    public function initPublishRecordings($parameters)
     {
         $request = Fluent($parameters);
         $recordings = new PublishRecordingsParameters(null, $request->get('publish', true));
@@ -227,15 +255,19 @@ trait initMeeting
         return $recordings;
     }
 
-    /*
+    /**
+     * @param mixed $recording
+     *
      * required fields
-     * recordingID
+     * recordID
+     *
+     * @return DeleteRecordingsParameters
      */
     public function initDeleteRecordings($recording)
     {
         $request = Fluent($recording);
 
-        return (new DeleteRecordingsParameters(implode(',', (array)$request->get('recordID'))));
+        return new DeleteRecordingsParameters(implode(',', (array)$request->get('recordID')));
     }
 
     private function makeJoinMeetingArray($object, $parameters)
@@ -253,14 +285,17 @@ trait initMeeting
         return $pass;
     }
 
-    /*
+    /**
+     * @param array $parameters
+     *
      * required fields
      * meetingID
      * meetingName
      * userName
      * attendeePW
      * moderatorPW
-     * redirect
+     *
+     * @return mixed
      */
     public function initStart(array $parameters)
     {
@@ -281,6 +316,10 @@ trait initMeeting
     /**
      * @param $parameters
      *
+     * require fields
+     * xml
+     * meetingID
+     *
      * @return SetConfigXMLParameters
      */
     public function initSetConfigXml(array $parameters)
@@ -300,6 +339,13 @@ trait initMeeting
     /**
      * @param array $parameters
      *
+     * require fields
+     * callbackURL
+     *
+     * optional fields
+     * meetingID
+     * getRaw
+     *
      * @return HooksCreateParameters
      */
     public function initHooksCreate(array $parameters)
@@ -315,20 +361,25 @@ trait initMeeting
     }
 
     /**
-     * @param array $parameters
+     * @param mixed $parameters
      *
      * @return HooksDestroyParameters
      */
-    public function initHooksDestroy(array $parameters)
+    public function initHooksDestroy($parameters)
     {
-        $parameters = Fluent($parameters);
-        $hooksDestroy = new HooksDestroyParameters($parameters->get('hooksID'));
+        $hooksID = "";
+        if (is_array($parameters)) {
+            $hooksID = Fluent($parameters)->get('hooksID');
+        } else {
+            $hooksID = $parameters;
+        }
 
-        return $hooksDestroy;
+        return new HooksDestroyParameters($hooksID);
     }
 
     /**
      * Check if connection to api can be established with the end point url and secret
+     *
      * @return array connection successful
      */
     private function initIsConnect()

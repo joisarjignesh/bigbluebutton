@@ -2,6 +2,7 @@
 
 namespace JoisarJignesh\Bigbluebutton\Tests;
 
+use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 use Orchestra\Testbench\TestCase;
 use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
@@ -19,10 +20,9 @@ class DeleteRecordingsTest extends TestCase
         return Bigbluebutton::class;
     }
 
-    /** @test */
-    public function true_is_true()
-    {
-        $array = [1];
-        $this->assertCount(1, $array);
-    }
+   public function testDeleteRecordringsParameters()
+   {
+        $deleteInstance = Bigbluebutton::initDeleteRecordings(['recordID' => 'dds']);
+        $this->assertInstanceOf(DeleteRecordingsParameters::class,$deleteInstance);
+   }
 }
