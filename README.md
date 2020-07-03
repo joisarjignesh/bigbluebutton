@@ -131,7 +131,8 @@ $createMeeting->setDuration(100); //overwrite default configuration
 - You can ask the BigBlueButton server to make a callback to your application when the meeting ends. Upon receiving
  the callback your application could, for example, change the interface for the user to hide the ‘join’ button.
  
-  ##### Note : End meeting callback URL will notify silently, User won't redirect to that page for testing endCallbackUrl test see [webhook site](https://webhook.site)
+  ##### Note : End meeting callback URL will notify silently, User won't redirect to that page.
+   - For testing endCallbackUrl see [webhook site](https://webhook.site)
   
   If you want to redirect users to that page after meeting end then can use logoutURL
  ```php
@@ -148,7 +149,8 @@ $createMeeting->setDuration(100); //overwrite default configuration
 ##### Recording ready callback [URL](https://docs.bigbluebutton.org/dev/api.html#recording-ready-callback-url) 
 - You can ask the BigBlueButton server to make a callback to your application when the recording for a meeting is ready for viewing. Upon receiving the callback your application could, for example, send the presenter an e-mail to notify them that their recording is ready
 
-   ##### Note :  Recording ready callback URL will notify silently, User won't redirect to that page for testing     Recording ready callback see [webhook site](https://webhook.site)
+   ##### Note :  Recording ready callback URL will notify silently, User won't redirect to that page.
+    - For testing Recording ready callback see [webhook site](https://webhook.site)
 ```php
 \Bigbluebutton::create([
     'meetingID' => 'tamku',
@@ -207,7 +209,7 @@ Bigbluebutton::isMeetingRunning([
     'meetingID' => 'tamku',
 ]);
 
-Bigbluebutton::isMeetingRunning('tamku'); //new way 
+Bigbluebutton::isMeetingRunning('tamku'); //second way 
 ```
 
 #### Close a meeting
@@ -290,6 +292,8 @@ dd(Bigbluebutton::hooksCreate([
 dd(Bigbluebutton::hooksDestroy([
      'hooksID' => 33
 ]));
+
+dd(Bigbluebutton::hooksDestroy('53')); //second way
 ```
 
 ### Other
