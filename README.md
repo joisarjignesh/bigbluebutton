@@ -166,7 +166,7 @@ $createMeeting->setDuration(100); //overwrite default configuration
 ```php
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 
-return response()->to(
+return redirect()->to(
  Bigbluebutton::join([
     'meetingID' => 'tamku',
     'userName' => 'disa',
@@ -316,7 +316,7 @@ dd(\Bigbluebutton::getApiVersion()); //return as collection
      //'redirect' => false // only want to create and meeting and get join url then use this parameter 
  ]);
 
-return response()->to($url);
+return redirect()->to($url);
  ```
 
 ### More Information Read This [wiki](https://github.com/bigbluebutton/bigbluebutton-api-php/wiki) 
