@@ -1,3 +1,4 @@
+![laravel-bigbluebutton](https://user-images.githubusercontent.com/17031402/87796124-93327b80-c866-11ea-8a77-cdfa844b3d63.jpg)
 # BigBlueButton Server API Library for Laravel 
 [![License](https://img.shields.io/packagist/l/joisarjignesh/bigbluebutton.svg)](https://github.com/joisarjignesh/bigbluebutton/LICENSE.md)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/joisarjignesh/bigbluebutton.svg?style=flat-square)](https://packagist.org/packages/joisarjignesh/bigbluebutton)
