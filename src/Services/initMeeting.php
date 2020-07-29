@@ -140,7 +140,7 @@ trait initMeeting
     {
         $request = Fluent($parameters);
 
-        return (new EndMeetingParameters($request->meetingID, $request->moderatorPW));
+        return new EndMeetingParameters($request->meetingID, $request->moderatorPW);
     }
 
     /**
@@ -216,60 +216,6 @@ trait initMeeting
         return new GetMeetingInfoParameters($request->meetingID, $request->moderatorPW);
     }
 
-    /**
-     * @param mixed $parameters
-     *
-     * optional fields
-     * meetingID
-     * recordID
-     * state
-     *
-     * @return GetRecordingsParameters
-     */
-    public function initGetRecordings($parameters)
-    {
-        $request = Fluent($parameters);
-        $recordings = new GetRecordingsParameters();
-
-        $recordings->setMeetingId(implode(',', (array)$request->get('meetingID')));
-        $recordings->setRecordId(implode(',', (array)$request->get('recordID')));
-        $recordings->setState($request->get('state', config('bigbluebutton.getRecordings.state')));
-
-        return $recordings;
-    }
-
-    /**
-     * @param mixed $parameters
-     *
-     * required fields
-     * recordID
-     *
-     * @return PublishRecordingsParameters
-     */
-    public function initPublishRecordings($parameters)
-    {
-        $request = Fluent($parameters);
-        $recordings = new PublishRecordingsParameters(null, $request->get('publish', true));
-        $recordings->setRecordingId(implode(',', (array)$request->get('recordID')));
-
-        return $recordings;
-    }
-
-    /**
-     * @param mixed $recording
-     *
-     * required fields
-     * recordID
-     *
-     * @return DeleteRecordingsParameters
-     */
-    public function initDeleteRecordings($recording)
-    {
-        $request = Fluent($recording);
-
-        return new DeleteRecordingsParameters(implode(',', (array)$request->get('recordID')));
-    }
-
     private function makeJoinMeetingArray($object, $parameters)
     {
         $pass['meetingID'] = $object->get('meetingID');
@@ -311,115 +257,5 @@ trait initMeeting
 
             return $this->join($parameters);
         }
-    }
-
-    /**
-     * @param $parameters
-     *
-     * require fields
-     * xml
-     * meetingID
-     *
-     * @return SetConfigXMLParameters
-     */
-    public function initSetConfigXml(array $parameters)
-    {
-        $parameters = Fluent($parameters);
-        $configXml = new SetConfigXMLParameters($parameters->get('meetingID'));
-        $rawXml = $parameters->xml;
-        if (!$parameters->xml instanceof \SimpleXMLElement) {
-            $rawXml = new \SimpleXMLElement($parameters->xml);
-        }
-
-        $configXml->setRawXml($rawXml);
-
-        return $configXml;
-    }
-
-    /**
-     * @param array $parameters
-     *
-     * require fields
-     * callbackURL
-     *
-     * optional fields
-     * meetingID
-     * getRaw
-     *
-     * @return HooksCreateParameters
-     */
-    public function initHooksCreate(array $parameters)
-    {
-        $parameters = Fluent($parameters);
-        $hooksCreate = new HooksCreateParameters($parameters->get('callbackURL'));
-        if ($parameters->meetingID) {
-            $hooksCreate->setMeetingId($parameters->meetingID);
-        }
-        $hooksCreate->setGetRaw($parameters->get('getRaw', false));
-
-        return $hooksCreate;
-    }
-
-    /**
-     * @param mixed $parameters
-     *
-     * @return HooksDestroyParameters
-     */
-    public function initHooksDestroy($parameters)
-    {
-        $hooksID = "";
-        if (is_array($parameters)) {
-            $hooksID = Fluent($parameters)->get('hooksID');
-        } else {
-            $hooksID = $parameters;
-        }
-
-        return new HooksDestroyParameters($hooksID);
-    }
-
-    /**
-     * Check if connection to api can be established with the end point url and secret
-     *
-     * @return array connection successful
-     */
-    private function initIsConnect()
-    {
-        if (!filter_var(config('bigbluebutton.BBB_SERVER_BASE_URL'), FILTER_VALIDATE_URL)) {
-            return [
-                'flag'    => false,
-                'message' => 'invalid url'
-            ];
-        }
-
-        try {
-            $response = $this->bbb->isMeetingRunning(
-                new IsMeetingRunningParameters('connection_check')
-            );
-
-            // url and secret working
-            if ($response->success()) {
-                return ['flag' => true];
-            }
-
-            // Checksum error - invalid secret
-            if ($response->failed() && $response->getMessageKey() == "checksumError") {
-                return [
-                    'flag'    => false,
-                    'message' => 'invalid secret key'
-                ];
-            }
-
-            // HTTP exception or XML parse
-        } catch (\Exception $e) {
-            return [
-                'flag'    => false,
-                'message' => 'invalid url and secret key'
-            ];
-        }
-
-        return [
-            'flag'    => false,
-            'message' => 'invalid url'
-        ];
     }
 }

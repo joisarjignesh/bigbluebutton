@@ -15,11 +15,19 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 use BigBlueButton\Parameters\SetConfigXMLParameters;
+use JoisarJignesh\Bigbluebutton\Services\initConfig;
+use JoisarJignesh\Bigbluebutton\Services\initExtra;
+use JoisarJignesh\Bigbluebutton\Services\initHooks;
 use JoisarJignesh\Bigbluebutton\Services\initMeeting;
+use JoisarJignesh\Bigbluebutton\Services\initRecordings;
 
 class Bbb
 {
-    use initMeeting;
+    use initMeeting,
+        initRecordings,
+        initHooks,
+        initConfig,
+        initExtra;
 
     /**
      * @var
@@ -56,7 +64,7 @@ class Bbb
     public function isConnect()
     {
         $response = $this->initIsConnect();
-        if($response['flag'] === true){
+        if ($response['flag'] === true) {
             return true;
         }
 
