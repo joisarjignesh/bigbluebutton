@@ -5,16 +5,10 @@ namespace JoisarJignesh\Bigbluebutton\Services;
 
 
 use BigBlueButton\Parameters\CreateMeetingParameters;
-use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
 use BigBlueButton\Parameters\GetMeetingInfoParameters;
-use BigBlueButton\Parameters\GetRecordingsParameters;
-use BigBlueButton\Parameters\HooksCreateParameters;
-use BigBlueButton\Parameters\HooksDestroyParameters;
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
-use BigBlueButton\Parameters\PublishRecordingsParameters;
-use BigBlueButton\Parameters\SetConfigXMLParameters;
 use Illuminate\Support\Str;
 
 trait initMeeting
