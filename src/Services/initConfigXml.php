@@ -6,16 +6,17 @@ namespace JoisarJignesh\Bigbluebutton\Services;
 
 use BigBlueButton\Parameters\SetConfigXMLParameters;
 
-trait initConfig
+trait initConfigXml
 {
     /**
-     * @param $parameters
+     * @param array $parameters
      *
      * require fields
      * xml
      * meetingID
      *
-     * @return SetConfigXMLParameters
+     * @return SetConfigXMLParameters gXMLParameters
+     * @throws \Exception
      */
     public function initSetConfigXml(array $parameters)
     {
@@ -23,7 +24,11 @@ trait initConfig
         $configXml = new SetConfigXMLParameters($parameters->get('meetingID'));
         $rawXml = $parameters->xml;
         if (!$parameters->xml instanceof \SimpleXMLElement) {
-            $rawXml = new \SimpleXMLElement($parameters->xml);
+            try {
+                $rawXml = new \SimpleXMLElement($parameters->xml);
+            } catch (\Exception $e) {
+                throw new \Exception('Could not parse payload as XMl');
+            }
         }
 
         $configXml->setRawXml($rawXml);

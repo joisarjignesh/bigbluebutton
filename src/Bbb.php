@@ -15,7 +15,7 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 use BigBlueButton\Parameters\SetConfigXMLParameters;
-use JoisarJignesh\Bigbluebutton\Services\initConfig;
+use JoisarJignesh\Bigbluebutton\Services\initConfigXml;
 use JoisarJignesh\Bigbluebutton\Services\initExtra;
 use JoisarJignesh\Bigbluebutton\Services\initHooks;
 use JoisarJignesh\Bigbluebutton\Services\initMeeting;
@@ -26,7 +26,7 @@ class Bbb
     use initMeeting,
         initRecordings,
         initHooks,
-        initConfig,
+        initConfigXml,
         initExtra;
 
     /**
@@ -50,9 +50,17 @@ class Bbb
     }
 
     /**
-     * @return BigBlueButton
+     * @return self
      */
     public function make()
+    {
+        return $this;
+    }
+
+    /**
+     * @return BigBlueButton
+     */
+    public function source()
     {
         return $this->bbb;
     }
@@ -267,7 +275,7 @@ class Bbb
 
     /**
      * @param $recording
-     * recordID as string(sepeate by commma)
+     * recordID as string(separated by comma)
      * publish as bool
      *
      * @return bool
@@ -312,6 +320,7 @@ class Bbb
      * @param $configXml
      *
      * @return \Illuminate\Support\Collection
+     * @throws \Exception
      */
     public function setConfigXml($configXml)
     {
