@@ -1,13 +1,12 @@
 <?php
 
-
 return [
     'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', ''),
     'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', ''),
     'create'              => [
         /**
          * if user does not pass attendee or moderator password then
-         * generate random password (length should be there)
+         * generate random password (length should be there).
          *
          * var @numeric
          */
@@ -16,7 +15,7 @@ return [
         /**
          * A welcome message that gets displayed on the chat window when the participant joins
          * if null then default server welcome message will be show..
-         * var @mixed
+         * var @mixed.
          **/
         'welcomeMessage'                     => null,
 
@@ -30,7 +29,7 @@ return [
         /**
          *    Set the maximum number of users allowed to joined the conference at the same time.
          *    Note :  zero means unlimited participants
-         *    var @numeric
+         *    var @numeric.
          */
         'maxParticipants'                    => 0,
 
@@ -57,14 +56,14 @@ return [
          * The maximum length (in minutes) for the meeting.
          * If duration contains a non-zero value,
          * then when the length of the meeting exceeds the duration value the server will immediately end the meeting
-         * Note :  zero means unlimited participants
+         * Note :  zero means unlimited participants.
          *
          * var @numeric
          */
         'duration'                           => 0,
 
         /**
-         *    Must be set to true to create a breakout room. default set false
+         *    Must be set to true to create a breakout room. default set false.
          *
          * var @bool
          */
@@ -77,7 +76,6 @@ return [
          * var @string
          */
         'moderatorOnlyMessage'               => null,
-
 
         /**
          * Whether to automatically start recording when first user joins (default false).
@@ -103,7 +101,7 @@ return [
 
         /**
          * Setting webcamsOnlyForModerator=true will cause all webcams
-         * shared by viewers during this meeting to only appear for moderators (added 1.1)
+         * shared by viewers during this meeting to only appear for moderators (added 1.1).
          *
          * var @bool
          */
@@ -111,14 +109,14 @@ return [
 
         /**
          * Setting logo=http://www.example.com/my-custom-logo.png will replace
-         * the default logo in the Flash client. (added 2.0)
+         * the default logo in the Flash client. (added 2.0).
          *
          * var @string
          */
         'logo'                               => null,
 
         /**
-         * Will set the banner text in the client. (added 2.0)
+         * Will set the banner text in the client. (added 2.0).
          *
          * var @string
          */
@@ -126,7 +124,7 @@ return [
 
         /**
          * Will set the banner background color in the client.
-         * The required format is color hex #FFFFFF. (added 2.0)
+         * The required format is color hex #FFFFFF. (added 2.0).
          *
          * var @string
          */
@@ -134,14 +132,14 @@ return [
 
         /**
          * Setting copyright=My custom copyright will replace
-         * the default copyright on the footer of the Flash client. (added 2.0)
+         * the default copyright on the footer of the Flash client. (added 2.0).
          *
          * var @string
          */
         'copyright'                          => null,
 
         /**
-         * Setting muteOnStart=true will mute all users when the meeting starts. (added 2.0)
+         * Setting muteOnStart=true will mute all users when the meeting starts. (added 2.0).
          *
          * var @bool
          */
@@ -149,7 +147,7 @@ return [
 
         /**
          * Default allowModsToUnmuteUsers=false.
-         * Setting to allowModsToUnmuteUsers=true will allow moderators to unmute other users in the meeting. (added 2.2)
+         * Setting to allowModsToUnmuteUsers=true will allow moderators to unmute other users in the meeting. (added 2.2).
          *
          * var @bool
          */
@@ -157,7 +155,7 @@ return [
 
         /**
          *  Default lockSettingsDisableCam=false.
-         * Setting lockSettingsDisableCam=true will prevent users from sharing their camera in the meeting. (added 2.2)
+         * Setting lockSettingsDisableCam=true will prevent users from sharing their camera in the meeting. (added 2.2).
          *
          * var @bool
          */
@@ -165,7 +163,7 @@ return [
 
         /**
          * Default lockSettingsDisableMic=false.
-         * Setting to lockSettingsDisableMic=true will only allow user to join listen only. (added 2.2)
+         * Setting to lockSettingsDisableMic=true will only allow user to join listen only. (added 2.2).
          *
          * var @bool
          */
@@ -173,7 +171,7 @@ return [
 
         /**
          * Default lockSettingsDisablePrivateChat=false.
-         * Setting to lockSettingsDisablePrivateChat=true will disable private chats in the meeting. (added 2.2)
+         * Setting to lockSettingsDisablePrivateChat=true will disable private chats in the meeting. (added 2.2).
          *
          * var @bool
          */
@@ -181,7 +179,7 @@ return [
 
         /**
          * Default lockSettingsDisablePublicChat=false.
-         * Setting to lockSettingsDisablePublicChat=true will disable public chat in the meeting. (added 2.2)
+         * Setting to lockSettingsDisablePublicChat=true will disable public chat in the meeting. (added 2.2).
          *
          * var @bool
          */
@@ -189,7 +187,7 @@ return [
 
         /**
          * Default lockSettingsDisableNote=false.
-         * Setting to lockSettingsDisableNote=true will disable notes in the meeting. (added 2.2)
+         * Setting to lockSettingsDisableNote=true will disable notes in the meeting. (added 2.2).
          *
          * var @bool
          **/
@@ -197,7 +195,7 @@ return [
 
         /**
          * Default lockSettingsLockedLayout=false.
-         * Setting to lockSettingsLockedLayout=true will lock the layout in the meeting. (added 2.2)
+         * Setting to lockSettingsLockedLayout=true will lock the layout in the meeting. (added 2.2).
          *
          * var @bool
          */
@@ -205,7 +203,7 @@ return [
 
         /**
          * Default lockSettingsLockOnJoin=true.
-         * Setting to lockSettingsLockOnJoin=false will not apply lock setting to users when they join. (added 2.2)
+         * Setting to lockSettingsLockOnJoin=false will not apply lock setting to users when they join. (added 2.2).
          *
          * var @bool
          */
@@ -213,7 +211,7 @@ return [
 
         /**
          * Default lockSettingsLockOnJoinConfigurable=false.
-         * Setting to lockSettingsLockOnJoinConfigurable=true will allow applying of lockSettingsLockOnJoin param. (added 2.2)
+         * Setting to lockSettingsLockOnJoinConfigurable=true will allow applying of lockSettingsLockOnJoin param. (added 2.2).
          *
          * var @bool
          */
@@ -228,12 +226,11 @@ return [
          *
          * var @string
          */
-        'guestPolicy'                        => 'ALWAYS_ACCEPT'
+        'guestPolicy'                        => 'ALWAYS_ACCEPT',
     ],
     'join'                => [
         /**
-         *
-         * var @bool
+         * var @bool.
          */
         'redirect'     => true,
 
@@ -242,7 +239,7 @@ return [
          *
          * var @bool
          */
-        'joinViaHtml5' => true
+        'joinViaHtml5' => true,
     ],
     'getRecordings'       => [
         /**
@@ -254,6 +251,6 @@ return [
          *
          *  var @string
          */
-        'state' => 'any',//'published,unpublished'
-    ]
+        'state' => 'any', //'published,unpublished'
+    ],
 ];

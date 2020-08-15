@@ -1,16 +1,17 @@
 <?php
-if (!function_exists('Fluent')) {
+
+if (! function_exists('Fluent')) {
     function Fluent($array)
     {
         return new \Illuminate\Support\Fluent($array);
     }
 }
 
-if (!function_exists('XmlToArray')) {
-    function XmlToArray($xml, $out = array())
+if (! function_exists('XmlToArray')) {
+    function XmlToArray($xml, $out = [])
     {
         $out = json_decode(
-            json_encode((array)$xml),
+            json_encode((array) $xml),
             1
         );
 
@@ -18,7 +19,7 @@ if (!function_exists('XmlToArray')) {
     }
 }
 
-if (!function_exists('XmlToObject')) {
+if (! function_exists('XmlToObject')) {
     function XmlToObject($xml)
     {
         return Fluent(XmlToArray($xml));

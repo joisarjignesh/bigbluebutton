@@ -1,8 +1,6 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton\Services;
-
 
 use BigBlueButton\Parameters\SetConfigXMLParameters;
 
@@ -23,7 +21,7 @@ trait initConfigXml
         $parameters = Fluent($parameters);
         $configXml = new SetConfigXMLParameters($parameters->get('meetingID'));
         $rawXml = $parameters->xml;
-        if (!$parameters->xml instanceof \SimpleXMLElement) {
+        if (! $parameters->xml instanceof \SimpleXMLElement) {
             try {
                 $rawXml = new \SimpleXMLElement($parameters->xml);
             } catch (\Exception $e) {

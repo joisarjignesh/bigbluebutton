@@ -3,13 +3,12 @@
 namespace JoisarJignesh\Bigbluebutton\Tests;
 
 use BigBlueButton\Parameters\DeleteRecordingsParameters;
+use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 use Orchestra\Testbench\TestCase;
-use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 
 class DeleteRecordingsTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [BigbluebuttonServiceProvider::class];
@@ -20,9 +19,9 @@ class DeleteRecordingsTest extends TestCase
         return Bigbluebutton::class;
     }
 
-   public function testDeleteRecordringsParameters()
-   {
+    public function testDeleteRecordringsParameters()
+    {
         $deleteInstance = Bigbluebutton::initDeleteRecordings(['recordID' => 'dds']);
-        $this->assertInstanceOf(DeleteRecordingsParameters::class,$deleteInstance);
-   }
+        $this->assertInstanceOf(DeleteRecordingsParameters::class, $deleteInstance);
+    }
 }

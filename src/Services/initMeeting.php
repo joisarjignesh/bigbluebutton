@@ -1,8 +1,6 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton\Services;
-
 
 use BigBlueButton\Parameters\CreateMeetingParameters;
 use BigBlueButton\Parameters\EndMeetingParameters;
@@ -13,7 +11,6 @@ use Illuminate\Support\Str;
 
 trait initMeeting
 {
-
     /**
      * @param array $parameters
      *
@@ -92,28 +89,28 @@ trait initMeeting
             $request->get('lockSettingsLockOnJoinConfigurable', config('bigbluebutton.create.lockSettingsLockOnJoinConfigurable', false))
         );
 
-        if (!is_null($request->get('endCallbackUrl', null))) {
+        if (! is_null($request->get('endCallbackUrl', null))) {
             $meetingParams->setEndCallbackUrl($request->get('endCallbackUrl', null));
         }
 
-        if (!is_null($request->get('bbb-recording-ready-url', null))) {
+        if (! is_null($request->get('bbb-recording-ready-url', null))) {
             $meetingParams->setRecordingReadyCallbackUrl($request->get('bbb-recording-ready-url', null));
         }
 
         $meetingParams->setFreeJoin($request->get('freeJoin', false));
 
-        $presentation = (array)$request->get('presentation', null);
+        $presentation = (array) $request->get('presentation', null);
         foreach ($presentation as $item) {
-            if (isset($item['fileName']) && !empty($item['fileName'])) {
-                if (isset($item['link']) && !empty($item['link'])) {
+            if (isset($item['fileName']) && ! empty($item['fileName'])) {
+                if (isset($item['link']) && ! empty($item['link'])) {
                     $meetingParams->addPresentation(trim($item['link']), null, trim($item['fileName']));
-                } elseif (isset($item['content']) && !empty($item['content'])) {
+                } elseif (isset($item['content']) && ! empty($item['content'])) {
                     $meetingParams->addPresentation(trim($item['fileName']), trim($item['content']), null);
                 }
             }
         }
 
-        $meta = (array)$request->get('meta', null);
+        $meta = (array) $request->get('meta', null);
         foreach ($meta as $key => $value) {
             $meetingParams->addMeta(trim($key), trim($value));
         }
@@ -184,7 +181,7 @@ trait initMeeting
      */
     public function initIsMeetingRunning($parameters)
     {
-        $meetingID = "";
+        $meetingID = '';
         if (is_array($parameters)) {
             $meetingID = Fluent($parameters)->get('meetingID');
         } else {
@@ -241,7 +238,7 @@ trait initMeeting
     {
         if ($this->getMeetingInfo($parameters)->isEmpty()) {
             $object = $this->create($parameters);
-            if (method_exists($object, 'isEmpty') && !$object->isEmpty()) {
+            if (method_exists($object, 'isEmpty') && ! $object->isEmpty()) {
                 return $this->join($this->makeJoinMeetingArray($object, $parameters));
             }
         } else {
