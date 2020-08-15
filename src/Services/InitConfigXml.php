@@ -4,7 +4,7 @@ namespace JoisarJignesh\Bigbluebutton\Services;
 
 use BigBlueButton\Parameters\SetConfigXMLParameters;
 
-trait initConfigXml
+trait InitConfigXml
 {
     /**
      * @param array $parameters

@@ -9,7 +9,7 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use Illuminate\Support\Str;
 
-trait initMeeting
+trait InitMeeting
 {
     /**
      * @param array $parameters

@@ -5,7 +5,7 @@ namespace JoisarJignesh\Bigbluebutton\Services;
 use BigBlueButton\Parameters\HooksCreateParameters;
 use BigBlueButton\Parameters\HooksDestroyParameters;
 
-trait initHooks
+trait InitHooks
 {
     /**
      * @param array $parameters

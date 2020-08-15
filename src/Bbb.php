@@ -14,19 +14,19 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 use BigBlueButton\Parameters\SetConfigXMLParameters;
-use JoisarJignesh\Bigbluebutton\Services\initConfigXml;
-use JoisarJignesh\Bigbluebutton\Services\initExtra;
-use JoisarJignesh\Bigbluebutton\Services\initHooks;
-use JoisarJignesh\Bigbluebutton\Services\initMeeting;
-use JoisarJignesh\Bigbluebutton\Services\initRecordings;
+use JoisarJignesh\Bigbluebutton\Services\InitConfigXml;
+use JoisarJignesh\Bigbluebutton\Services\InitExtra;
+use JoisarJignesh\Bigbluebutton\Services\InitHooks;
+use JoisarJignesh\Bigbluebutton\Services\InitMeeting;
+use JoisarJignesh\Bigbluebutton\Services\InitRecordings;
 
 class Bbb
 {
-    use initMeeting,
-        initRecordings,
-        initHooks,
-        initConfigXml,
-        initExtra;
+    use InitMeeting,
+        InitRecordings,
+        InitHooks,
+        InitConfigXml,
+        InitExtra;
 
     /**
      * @var

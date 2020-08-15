@@ -6,7 +6,7 @@ use BigBlueButton\Parameters\DeleteRecordingsParameters;
 use BigBlueButton\Parameters\GetRecordingsParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 
-trait initRecordings
+trait InitRecordings
 {
     /**
      * @param mixed $parameters

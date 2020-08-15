@@ -4,7 +4,7 @@ namespace JoisarJignesh\Bigbluebutton\Services;
 
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 
-trait initExtra
+trait InitExtra
 {
     /**
      * Check if connection to api can be established with the end point url and secret.
