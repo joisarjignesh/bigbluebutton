@@ -1,6 +1,5 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton;
 
 use BigBlueButton\BigBlueButton;
@@ -38,7 +37,6 @@ class Bbb
      */
     protected $bbb;
 
-
     /**
      * Bbb constructor.
      *
@@ -66,7 +64,7 @@ class Bbb
     }
 
     /**
-     * check url and secret is working
+     * check url and secret is working.
      * @return bool
      */
     public function isConnect()
@@ -80,7 +78,7 @@ class Bbb
     }
 
     /**
-     *  Return a list of all meetings
+     *  Return a list of all meetings.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -101,9 +99,8 @@ class Bbb
         return collect([]);
     }
 
-
     /**
-     * $meeting
+     * $meeting.
      *
      * @param $meeting
      *
@@ -115,7 +112,7 @@ class Bbb
      */
     public function create($meeting)
     {
-        if (!$meeting instanceof CreateMeetingParameters) {
+        if (! $meeting instanceof CreateMeetingParameters) {
             $meeting = $this->initCreateMeeting($meeting);
         }
 
@@ -137,14 +134,14 @@ class Bbb
      */
     public function isMeetingRunning($meeting)
     {
-        if (!$meeting instanceof IsMeetingRunningParameters) {
+        if (! $meeting instanceof IsMeetingRunningParameters) {
             $meeting = $this->initIsMeetingRunning($meeting);
         }
 
         $this->response = $this->bbb->isMeetingRunning($meeting);
         if ($this->response->success()) {
             $response = XmlToArray($this->response->getRawXml());
-            if (isset($response['running']) && $response['running'] == "true") {
+            if (isset($response['running']) && $response['running'] == 'true') {
                 return true;
             }
         }
@@ -153,7 +150,7 @@ class Bbb
     }
 
     /**
-     *  Join meeting
+     *  Join meeting.
      *
      * @param $meeting
      * required fields
@@ -166,7 +163,7 @@ class Bbb
      */
     public function join($meeting)
     {
-        if (!$meeting instanceof JoinMeetingParameters) {
+        if (! $meeting instanceof JoinMeetingParameters) {
             $meeting = $this->initJoinMeeting($meeting);
         }
 
@@ -178,7 +175,7 @@ class Bbb
     }
 
     /**
-     *  Returns information about the meeting
+     *  Returns information about the meeting.
      *
      * @param $meeting
      * required fields
@@ -189,7 +186,7 @@ class Bbb
      */
     public function getMeetingInfo($meeting)
     {
-        if (!$meeting instanceof GetMeetingInfoParameters) {
+        if (! $meeting instanceof GetMeetingInfoParameters) {
             $meeting = $this->initGetMeetingInfo($meeting);
         }
 
@@ -219,7 +216,7 @@ class Bbb
     }
 
     /**
-     *  Close meeting
+     *  Close meeting.
      *
      * @param  $meeting
      * required fields:
@@ -230,7 +227,7 @@ class Bbb
      */
     public function close($meeting)
     {
-        if (!$meeting instanceof EndMeetingParameters) {
+        if (! $meeting instanceof EndMeetingParameters) {
             $meeting = $this->initCloseMeeting($meeting);
         }
 
@@ -243,7 +240,6 @@ class Bbb
     }
 
     /**
-     *
      * @param $recording
      * required fields
      * meetingID
@@ -256,7 +252,7 @@ class Bbb
      */
     public function getRecordings($recording)
     {
-        if (!$recording instanceof GetRecordingsParameters) {
+        if (! $recording instanceof GetRecordingsParameters) {
             $recording = $this->initGetRecordings($recording);
         }
 
@@ -282,14 +278,14 @@ class Bbb
      */
     public function publishRecordings($recording)
     {
-        if (!$recording instanceof PublishRecordingsParameters) {
+        if (! $recording instanceof PublishRecordingsParameters) {
             $recording = $this->initPublishRecordings($recording);
         }
 
         $this->response = $this->bbb->publishRecordings($recording);
         if ($this->response->success()) {
             $response = XmlToArray($this->response->getRawXml());
-            if (isset($response['published']) && $response['published'] == "true") {
+            if (isset($response['published']) && $response['published'] == 'true') {
                 return true;
             }
         }
@@ -307,7 +303,7 @@ class Bbb
      */
     public function deleteRecordings($recording)
     {
-        if (!$recording instanceof DeleteRecordingsParameters) {
+        if (! $recording instanceof DeleteRecordingsParameters) {
             $recording = $this->initDeleteRecordings($recording);
         }
 
@@ -324,7 +320,7 @@ class Bbb
      */
     public function setConfigXml($configXml)
     {
-        if (!$configXml instanceof SetConfigXMLParameters) {
+        if (! $configXml instanceof SetConfigXMLParameters) {
             $configXml = $this->initSetConfigXml($configXml);
         }
 
@@ -360,7 +356,7 @@ class Bbb
      */
     public function hooksCreate($hooks)
     {
-        if (!$hooks instanceof HooksCreateParameters) {
+        if (! $hooks instanceof HooksCreateParameters) {
             $hooks = $this->initHooksCreate($hooks);
         }
 
@@ -376,7 +372,7 @@ class Bbb
      */
     public function hooksDestroy($hooks)
     {
-        if (!$hooks instanceof HooksDestroyParameters) {
+        if (! $hooks instanceof HooksDestroyParameters) {
             $hooks = $this->initHooksDestroy($hooks);
         }
 
@@ -384,5 +380,4 @@ class Bbb
 
         return collect(XmlToArray($this->response->getRawXml()));
     }
-
 }

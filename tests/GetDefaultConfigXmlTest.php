@@ -2,13 +2,12 @@
 
 namespace JoisarJignesh\Bigbluebutton\Tests;
 
+use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 use Orchestra\Testbench\TestCase;
-use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 
 class GetDefaultConfigXmlTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [BigbluebuttonServiceProvider::class];

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton\Services;
-
 
 use BigBlueButton\Parameters\HooksCreateParameters;
 use BigBlueButton\Parameters\HooksDestroyParameters;
@@ -40,7 +38,7 @@ trait initHooks
      */
     public function initHooksDestroy($parameters)
     {
-        $hooksID = "";
+        $hooksID = '';
         if (is_array($parameters)) {
             $hooksID = Fluent($parameters)->get('hooksID');
         } else {
@@ -49,6 +47,4 @@ trait initHooks
 
         return new HooksDestroyParameters($hooksID);
     }
-
-
 }

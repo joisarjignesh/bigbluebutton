@@ -2,13 +2,12 @@
 
 namespace JoisarJignesh\Bigbluebutton\Tests;
 
+use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 use Orchestra\Testbench\TestCase;
-use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 
 class CreateMeetingTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [BigbluebuttonServiceProvider::class];
@@ -22,13 +21,13 @@ class CreateMeetingTest extends TestCase
     /** @test */
     public function true_is_true()
     {
-      /*  Bigbluebutton::create([
-            'meetingID'   => 'tamku',
-            'meetingName' => 'test meeting',
-            'attendeePW'  => 'attendee',
-            'moderatorPW' => 'moderator',
-        ]);*/
-         $array = [1];
-         $this->assertCount(1, $array);
+        /*  Bigbluebutton::create([
+              'meetingID'   => 'tamku',
+              'meetingName' => 'test meeting',
+              'attendeePW'  => 'attendee',
+              'moderatorPW' => 'moderator',
+          ]);*/
+        $array = [1];
+        $this->assertCount(1, $array);
     }
 }

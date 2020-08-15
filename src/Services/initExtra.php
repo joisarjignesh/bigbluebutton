@@ -1,24 +1,22 @@
 <?php
 
-
 namespace JoisarJignesh\Bigbluebutton\Services;
-
 
 use BigBlueButton\Parameters\IsMeetingRunningParameters;
 
 trait initExtra
 {
     /**
-     * Check if connection to api can be established with the end point url and secret
+     * Check if connection to api can be established with the end point url and secret.
      *
      * @return array connection successful
      */
     private function initIsConnect()
     {
-        if (!filter_var(config('bigbluebutton.BBB_SERVER_BASE_URL'), FILTER_VALIDATE_URL)) {
+        if (! filter_var(config('bigbluebutton.BBB_SERVER_BASE_URL'), FILTER_VALIDATE_URL)) {
             return [
                 'flag'    => false,
-                'message' => 'invalid url'
+                'message' => 'invalid url',
             ];
         }
 
@@ -33,10 +31,10 @@ trait initExtra
             }
 
             // Checksum error - invalid secret
-            if ($response->failed() && $response->getMessageKey() == "checksumError") {
+            if ($response->failed() && $response->getMessageKey() == 'checksumError') {
                 return [
                     'flag'    => false,
-                    'message' => 'invalid secret key'
+                    'message' => 'invalid secret key',
                 ];
             }
 
@@ -44,13 +42,13 @@ trait initExtra
         } catch (\Exception $e) {
             return [
                 'flag'    => false,
-                'message' => 'invalid url and secret key'
+                'message' => 'invalid url and secret key',
             ];
         }
 
         return [
             'flag'    => false,
-            'message' => 'invalid url'
+            'message' => 'invalid url',
         ];
     }
 }

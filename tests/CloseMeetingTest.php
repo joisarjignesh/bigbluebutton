@@ -2,13 +2,12 @@
 
 namespace JoisarJignesh\Bigbluebutton\Tests;
 
+use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 use JoisarJignesh\Bigbluebutton\Facades\Bigbluebutton;
 use Orchestra\Testbench\TestCase;
-use JoisarJignesh\Bigbluebutton\BigbluebuttonServiceProvider;
 
 class CloseMeetingTest extends TestCase
 {
-
     protected function getPackageProviders($app)
     {
         return [BigbluebuttonServiceProvider::class];
@@ -28,7 +27,6 @@ class CloseMeetingTest extends TestCase
 
         $this->assertEquals($meetingId, $instance->getMeetingId());
         $this->assertEquals($password, $instance->getPassword());
-        $this->assertEquals('meetingID=' . $meetingId . '&password=' . $password, $instance->getHTTPQuery());
-
+        $this->assertEquals('meetingID='.$meetingId.'&password='.$password, $instance->getHTTPQuery());
     }
 }

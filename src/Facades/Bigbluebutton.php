@@ -4,7 +4,6 @@ namespace JoisarJignesh\Bigbluebutton\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-
 /**
  * @method static array all()
  * @method static isMeetingRunning($arrayOtherWiseObject)
