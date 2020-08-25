@@ -167,6 +167,11 @@ trait InitMeeting
         if ($request->clientUrl) {
             $meetingParams->setClientURL($request->clientUrl);
         }
+        if ($request->customParameters && is_array($request->customParameters)) {
+            foreach($request->customParameters as $key => $value) {
+                $meetingParams->setCustomParameter($key,$value);
+            }
+        }
 
         return $meetingParams;
     }

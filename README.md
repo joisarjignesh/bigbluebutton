@@ -176,13 +176,18 @@ return redirect()->to(
 );
 ```
 
-- Join meeting but does want to redirect into BigBlueButton server
+- Join meeting but does want to redirect into BigBlueButton server and pass other parameters
 ```php
 \Bigbluebutton::join([
     'meetingID' => 'tamku',
     'userName' => 'disa',
     'password' => 'attendee', //which user role want to join set password here
-    'redirect' => false, //it will not redirect into bigblueservr
+    'redirect' => false, //it will not redirect into bigblueserver
+    'userId' =>  "54575",
+    'customParameters' => [  
+       'foo' => 'bar',
+       'key' => 'value'
+    ]
 ]);
 ```
 
