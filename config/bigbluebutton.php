@@ -1,8 +1,32 @@
 <?php
 
 return [
+    /**
+     * Default BigBlueButton Server Configurations
+     * By default load this configuration not a multiple server configuration
+     *
+     */
+
     'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', ''),
     'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', ''),
+
+    /**
+     * For Multiple BigBlueButton Server Configurations
+     * For Each server you must be specify salt and url with define server name
+     * Note : if you want to used multiple server configuration you must specify servername
+     *
+     */
+    'servers' => [
+        'server1' => [
+            'BBB_SECURITY_SALT'    => '',
+            'BBB_SERVER_BASE_URL' => '',
+        ],
+        'server2' => [
+            'BBB_SECURITY_SALT'    => '',
+            'BBB_SERVER_BASE_URL' => '',
+        ]
+    ],
+
     'create'              => [
         /**
          * if user does not pass attendee or moderator password then

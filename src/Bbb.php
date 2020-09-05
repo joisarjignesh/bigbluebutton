@@ -14,6 +14,7 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 use BigBlueButton\Parameters\SetConfigXMLParameters;
+use JoisarJignesh\Bigbluebutton\Bigbluebutton as BigBlueButtonServer;
 use JoisarJignesh\Bigbluebutton\Services\InitConfigXml;
 use JoisarJignesh\Bigbluebutton\Services\InitExtra;
 use JoisarJignesh\Bigbluebutton\Services\InitHooks;
@@ -45,6 +46,28 @@ class Bbb
     public function __construct(BigBlueButton $bbb)
     {
         $this->bbb = $bbb;
+    }
+
+    /**
+     * for specific server instance
+     *
+     * @param $serverName
+     *
+     * @return Bbb
+     * @throws \Exception
+     */
+    public static function server($serverName)
+    {
+        if (is_null(config("bigbluebutton.servers.{$serverName}", null))) {
+            throw new \Exception("Could not found {$serverName} server configuration in config file");
+        }
+
+        return new self(
+            new BigBlueButtonServer(
+                config("bigbluebutton.servers.{$serverName}.BBB_SERVER_BASE_URL"),
+                config("bigbluebutton.servers.{$serverName}.BBB_SECURITY_SALT")
+            )
+        );
     }
 
     /**
