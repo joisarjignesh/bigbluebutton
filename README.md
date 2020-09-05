@@ -63,7 +63,17 @@ BBB_SECURITY_SALT=bbb_secret_key
 BBB_SERVER_BASE_URL=https://example.com/bigbluebutton/
 ``` 
  
- After Define salt and url clear old configurations 
+ - For Specific server configuration (only for multiple server by default is optional)
+  ```
+  'servers' => [
+         'server1' => [
+             'BBB_SECURITY_SALT'    => '',
+             'BBB_SERVER_BASE_URL'  => '',
+         ],
+   ]
+```
+
+After Define salt and url clear old configurations 
  ```
 php artisan config:clear
 ```
@@ -71,7 +81,8 @@ php artisan config:clear
  
  ### Check a url and secret working
 ```php
-dd(\Bigbluebutton::isConnect());
+dd(\Bigbluebutton::isConnect()); //default 
+dd(\Bigbluebutton::server('server1')->isConnect()); //for specific server 
 ```
  
  ### Meeting
