@@ -49,7 +49,7 @@ class Bbb
     }
 
     /**
-     * for specific server instance
+     * for specific server instance.
      *
      * @param $serverName
      *
