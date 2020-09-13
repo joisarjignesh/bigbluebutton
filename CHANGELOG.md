@@ -14,3 +14,6 @@ All notable changes to `bigbluebutton` will be documented in this file
 - for specific server create,connect,join same as default
 - by default if you not specify server it will used default server 
 
+## 1.1.5 - 2020-09-10
+- add laravel 8 support
+	
