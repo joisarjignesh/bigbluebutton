@@ -56,7 +56,7 @@ class Bbb
      * @return Bbb
      * @throws \Exception
      */
-    public static function server($serverName)
+    public function server($serverName)
     {
         if (is_null(config("bigbluebutton.servers.{$serverName}", null))) {
             throw new \Exception("Could not found {$serverName} server configuration in config file");
