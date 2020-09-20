@@ -1,5 +1,8 @@
 <?php
 
+use JoisarJignesh\Bigbluebutton\Bigbluebutton;
+use JoisarJignesh\Bigbluebutton\Bbb;
+
 if (! function_exists('Fluent')) {
     function Fluent($array)
     {
@@ -16,6 +19,20 @@ if (! function_exists('XmlToArray')) {
         );
 
         return $out;
+    }
+}
+
+if (!function_exists('bigbluebutton')) {
+    function bigbluebutton($serverName = null)
+    {
+        if (is_null($serverName)) {
+            return new Bbb(new Bigbluebutton(
+                config('bigbluebutton.BBB_SERVER_BASE_URL'),
+                config('bigbluebutton.BBB_SECURITY_SALT')
+            ));
+        }
+
+        return (new Bbb(new Bigbluebutton(null, null)))->server($serverName);
     }
 }
 
