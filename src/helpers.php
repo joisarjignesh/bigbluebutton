@@ -1,7 +1,7 @@
 <?php
 
-use JoisarJignesh\Bigbluebutton\Bigbluebutton;
 use JoisarJignesh\Bigbluebutton\Bbb;
+use JoisarJignesh\Bigbluebutton\Bigbluebutton;
 
 if (! function_exists('Fluent')) {
     function Fluent($array)
@@ -22,7 +22,7 @@ if (! function_exists('XmlToArray')) {
     }
 }
 
-if (!function_exists('bigbluebutton')) {
+if (! function_exists('bigbluebutton')) {
     function bigbluebutton($serverName = null)
     {
         if (is_null($serverName)) {
