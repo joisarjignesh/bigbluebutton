@@ -83,6 +83,7 @@ php artisan config:clear
 ```php
 dd(\Bigbluebutton::isConnect()); //default 
 dd(\Bigbluebutton::server('server1')->isConnect()); //for specific server 
+dd(bigbluebutton()->isConnect()); //using helper method 
 ```
  
  ### Meeting
@@ -205,7 +206,8 @@ return redirect()->to(
 #### Get a list of meetings
 - Get all meetings  [document](https://docs.bigbluebutton.org/dev/api.html#getmeetings)
 ```php
-\Bigbluebutton::all();
+\Bigbluebutton::all(); //using facade
+bigbluebutton()->all(); //using helper method 
 ```
 
 #### Get meeting info
