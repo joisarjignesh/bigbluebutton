@@ -4,6 +4,8 @@ namespace JoisarJignesh\Bigbluebutton;
 
 use BigBlueButton\BigBlueButton as BigBlueButtonParent;
 use BigBlueButton\Util\UrlBuilder;
+use Illuminate\Support\Str;
+
 
 class Bigbluebutton extends BigBlueButtonParent
 {
@@ -15,8 +17,8 @@ class Bigbluebutton extends BigBlueButtonParent
      */
     public function __construct($bbbServerBaseUrl, $securitySecret)
     {
-        $this->securitySecret = $securitySecret;
-        $this->bbbServerBaseUrl = $bbbServerBaseUrl;
+        $this->bbbServerBaseUrl = Str::finish(trim($bbbServerBaseUrl),'/');
+        $this->securitySecret = trim($securitySecret);
         $this->urlBuilder = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
     }
 }
