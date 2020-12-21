@@ -7,6 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/joisarjignesh/bigbluebutton.svg?style=flat-square)](https://packagist.org/packages/joisarjignesh/bigbluebutton)
 ![Laravel Framework](https://img.shields.io/badge/laravel-%3E%3D5.5-blue)
 
+
 Package that provides easily communicate between BigBlueButton server and laravel framework
 
 * [Requirements](#requirements)
@@ -341,6 +342,14 @@ return redirect()->to($url);
 ### More Information Read This [wiki](https://github.com/bigbluebutton/bigbluebutton-api-php/wiki) 
 ### For Bigbluebutton Api Testing See This [ApiMate](https://mconf.github.io/api-mate/) 
 ### See Bigbluebutton Official dev Api   [Bigbluebutton](https://docs.bigbluebutton.org/dev/api.html) 
+
+### Support
+
+<a href="https://www.buymeacoffee.com/joisarjignesh" target="_blank">
+  <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+<a href="https://www.paypal.me/joisarjignesh" target="_blank">
+  <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate" ></a>
 
 ### Changelog
 
