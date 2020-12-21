@@ -6,7 +6,6 @@ use BigBlueButton\BigBlueButton as BigBlueButtonParent;
 use BigBlueButton\Util\UrlBuilder;
 use Illuminate\Support\Str;
 
-
 class Bigbluebutton extends BigBlueButtonParent
 {
     /**
