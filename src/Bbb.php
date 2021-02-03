@@ -109,7 +109,7 @@ class Bbb
     {
         $this->response = $this->bbb->getMeetings();
         if ($this->response->success()) {
-            if (count($this->response->getRawXml()->meetings->meeting) > 0) {
+            if (!is_null($this->response->getRawXml()->meetings->meeting) && count($this->response->getRawXml()->meetings->meeting) > 0) {
                 $meetings = [];
                 foreach ($this->response->getRawXml()->meetings->meeting as $meeting) {
                     $meetings[] = XmlToArray($meeting);
