@@ -280,14 +280,14 @@ class Bbb
         }
 
         $this->response = $this->bbb->getRecordings($recording);
-        if (count($this->response->getRawXml()->recordings->recording) > 0) {
+        if ($this->response->success() && !is_null($this->response->getRawXml()->recordings->recording) && count($this->response->getRawXml()->recordings->recording) > 0) {
             $recordings = [];
             foreach ($this->response->getRawXml()->recordings->recording as $r) {
                 $recordings[] = XmlToArray($r);
             }
 
             return collect($recordings);
-        }
+       }
 
         return collect([]);
     }
