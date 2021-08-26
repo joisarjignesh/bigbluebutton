@@ -227,7 +227,7 @@ trait InitMeeting
         $exceptParameters = ['meetingID', 'moderatorPW', 'userName', 'meetingName', 'redirect'];
         if (is_array($parameters)) {
             foreach ($parameters as $key => $value) {
-                if (!empty($key) && is_string($key) && !empty($value) && !in_array($key, $exceptParameters)) {
+                if (! empty($key) && is_string($key) && ! empty($value) && ! in_array($key, $exceptParameters)) {
                     $pass[$key] = $value;
                 }
             }
