@@ -9,13 +9,12 @@ use BigBlueButton\Parameters\PublishRecordingsParameters;
 trait InitRecordings
 {
     /**
-     * @param mixed $parameters
+     * @param  mixed  $parameters
      *
      * optional fields
      * meetingID
      * recordID
      * state
-     *
      * @return GetRecordingsParameters
      */
     public function initGetRecordings($parameters)
@@ -31,11 +30,10 @@ trait InitRecordings
     }
 
     /**
-     * @param mixed $parameters
+     * @param  mixed  $parameters
      *
      * required fields
      * recordID
-     *
      * @return PublishRecordingsParameters
      */
     public function initPublishRecordings($parameters)
@@ -48,11 +46,10 @@ trait InitRecordings
     }
 
     /**
-     * @param mixed $recording
+     * @param  mixed  $recording
      *
      * required fields
      * recordID
-     *
      * @return DeleteRecordingsParameters
      */
     public function initDeleteRecordings($recording)

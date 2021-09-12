@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 trait InitMeeting
 {
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * required fields
      * meetingID
@@ -20,7 +20,6 @@ trait InitMeeting
      * optional fields
      * moderatorPW
      * attendeePW
-     *
      * @return CreateMeetingParameters
      */
     public function initCreateMeeting(array $parameters)
@@ -119,12 +118,11 @@ trait InitMeeting
     }
 
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * required fields:
      * meetingID
      * moderatorPW close meeting must be there moderator password
-     *
      * @return EndMeetingParameters
      */
     public function initCloseMeeting(array $parameters)
@@ -135,14 +133,13 @@ trait InitMeeting
     }
 
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
      *  required fields
      *
      *  meetingID
      *  userName join by name
      *  password which role want to join
-     *
      * @return JoinMeetingParameters
      */
     public function initJoinMeeting(array $parameters)
@@ -181,7 +178,6 @@ trait InitMeeting
      *
      * required fields
      * meetingID
-     *
      * @return IsMeetingRunningParameters
      */
     public function initIsMeetingRunning($parameters)
@@ -202,7 +198,6 @@ trait InitMeeting
      * required fields
      * meetingID
      * moderatorPW must be there moderator password
-     *
      * @return GetMeetingInfoParameters
      */
     public function initGetMeetingInfo($parameters)
@@ -237,7 +232,7 @@ trait InitMeeting
     }
 
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * required fields
      * meetingID
@@ -245,7 +240,6 @@ trait InitMeeting
      * userName
      * attendeePW
      * moderatorPW
-     *
      * @return mixed
      */
     public function initStart(array $parameters)
