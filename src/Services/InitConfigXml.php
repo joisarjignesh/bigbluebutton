@@ -7,13 +7,13 @@ use BigBlueButton\Parameters\SetConfigXMLParameters;
 trait InitConfigXml
 {
     /**
-     * @param array $parameters
+     * @param  array  $parameters
      *
      * require fields
      * xml
      * meetingID
-     *
      * @return SetConfigXMLParameters gXMLParameters
+     *
      * @throws \Exception
      */
     public function initSetConfigXml(array $parameters)
