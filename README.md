@@ -29,6 +29,7 @@ Package that provides easily communicate between BigBlueButton server and larave
         * [Get recordings](#get-recordings)
         * [Publish recordings](#publish-recordings)
         * [Delete recordings](#delete-recordings)
+        * [Update recordings](#update-recordings)
      * [Config Xml](#config-xml)
         * [Get default config](#get-default-config-xml)
         * [Set config](#set-config-xml)
@@ -270,6 +271,14 @@ Bigbluebutton::close([
 - Delete recordings [document](https://docs.bigbluebutton.org/dev/api.html#deleterecordings)
 ```php
 \Bigbluebutton::deleteRecordings([
+    //'recordID' => 'a3f1s',
+    'recordID' => ['a3f1s','a4ff2'] //pass array if multiple delete recordings
+]);
+```
+#### Update recordings
+- Update recordings [document](https://docs.bigbluebutton.org/dev/api.html#updaterecordings)
+```php
+\Bigbluebutton::updateRecordings([
     //'recordID' => 'a3f1s',
     'recordID' => ['a3f1s','a4ff2'] //pass array if multiple delete recordings
 ]);

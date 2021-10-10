@@ -14,6 +14,7 @@ use BigBlueButton\Parameters\IsMeetingRunningParameters;
 use BigBlueButton\Parameters\JoinMeetingParameters;
 use BigBlueButton\Parameters\PublishRecordingsParameters;
 use BigBlueButton\Parameters\SetConfigXMLParameters;
+use BigBlueButton\Parameters\UpdateRecordingsParameters;
 use JoisarJignesh\Bigbluebutton\Bigbluebutton as BigBlueButtonServer;
 use JoisarJignesh\Bigbluebutton\Services\InitConfigXml;
 use JoisarJignesh\Bigbluebutton\Services\InitExtra;
@@ -323,6 +324,24 @@ class Bbb
         }
 
         $this->response = $this->bbb->deleteRecordings($recording);
+
+        return collect(XmlToArray($this->response->getRawXml()));
+    }
+
+    /**
+     * @param $recording
+     *
+     * required fields
+     * recordingID
+     * @return \Illuminate\Support\Collection
+     */
+    public function updateRecordings($recording)
+    {
+        if (! $recording instanceof UpdateRecordingsParameters) {
+            $recording = $this->initUpdateRecordings($recording);
+        }
+
+        $this->response = $this->bbb->updateRecordings($recording);
 
         return collect(XmlToArray($this->response->getRawXml()));
     }
