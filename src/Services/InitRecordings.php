@@ -40,10 +40,10 @@ trait InitRecordings
     public function initPublishRecordings($parameters)
     {
         $request = Fluent($parameters);
-        $recordings = new PublishRecordingsParameters(null, $request->get('publish', true));
-        $recordings->setRecordingId(implode(',', (array) $request->get('recordID')));
-
-        return $recordings;
+        return new PublishRecordingsParameters(
+            implode(',', (array) $request->get('recordID')),
+            $request->get('publish', true)
+        );
     }
 
     /**
