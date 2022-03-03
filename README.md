@@ -30,9 +30,6 @@ Package that provides easily communicate between BigBlueButton server and larave
         * [Publish recordings](#publish-recordings)
         * [Delete recordings](#delete-recordings)
         * [Update recordings](#update-recordings)
-     * [Config Xml](#config-xml)
-        * [Get default config](#get-default-config-xml)
-        * [Set config](#set-config-xml)
      * [Hooks](#hooks)
        * [Create Hooks](#hooks-create)
        * [Destroy Hooks](#hooks-destroy)
@@ -284,26 +281,6 @@ Bigbluebutton::close([
 ]);
 ```
 
-### Config xml
-##### Get default config xml
-- Get default config xml [document](https://docs.bigbluebutton.org/dev/api.html#getdefaultconfigxml)
-```php
-\Bigbluebutton::getDefaultConfigXml(); //return as xml
-//dd(XmlToArray($this->bbb->getDefaultConfigXML()->getRawXml())); //return as array 
-```
-
-
-#### Set config xml 
-- Set config xml [document](https://docs.bigbluebutton.org/dev/api.html#setconfigxml)
-```php
-\Bigbluebutton::setConfigXml([
-  //'xml'       => new \SimpleXMLElement('<config><modules><localeversion supressWarning="false">0.9.0</localeversion></modules></config>'),
-  'xml'       => '<config><modules><localeversion supressWarning="false">0.9.0</localeversion></modules></config>', 
-   //pass as string other wise pass as SimpleXmlElement object like above line
-  'meetingID' => 'tamku'
-]);
-```
-
 ### Hooks
 #### Hooks create
 - Hooks Create [document](https://docs.bigbluebutton.org/dev/webhooks.html#hookscreate)
@@ -339,6 +316,7 @@ dd(\Bigbluebutton::getApiVersion()); //return as collection
  ```php
  $url = \Bigbluebutton::start([
      'meetingID' => 'tamku',
+     'meetingName' => 'test meeting name',
      'moderatorPW' => 'moderator', //moderator password set here
      'attendeePW' => 'attendee', //attendee password here
      'userName' => 'John Deo',//for join meeting 

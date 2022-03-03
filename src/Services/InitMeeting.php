@@ -25,19 +25,23 @@ trait InitMeeting
     public function initCreateMeeting(array $parameters)
     {
         $request = Fluent($parameters);
-        $meetingParams = new CreateMeetingParameters($request->meetingID, $request->meetingName);
+        $meetingParams = new CreateMeetingParameters($request->get('meetingID'), $request->get('meetingName','default meeting name '.Str::random(7)));
         $meetingParams->setModeratorPassword($request->get('moderatorPW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
         $meetingParams->setAttendeePassword($request->get('attendeePW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
         $meetingParams->setDuration($request->get('duration', config('bigbluebutton.create.duration', 0)));
         $meetingParams->setRecord($request->get('record', config('bigbluebutton.create.record', false)));
         $meetingParams->setMaxParticipants($request->get('maxParticipants', config('bigbluebutton.create.maxParticipants', 0)));
-        $meetingParams->setLogoutUrl($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)));
+        if(!is_null($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)))) {
+            $meetingParams->setLogoutUrl($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)));
+        }
         $meetingParams->setGuestPolicy(
             $request->get('guestPolicy', config('bigbluebutton.create.guestPolicy', 'ALWAYS_ACCEPT'))
         );
-        $meetingParams->setWelcomeMessage(
-            $request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null))
-        );
+        if(!is_null($request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null)))) {
+            $meetingParams->setWelcomeMessage(
+                $request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null))
+            );
+        }
         $meetingParams->setDialNumber(
             $request->get('dialNumber', config('bigbluebutton.create.dialNumber', null))
         );
@@ -65,7 +69,6 @@ trait InitMeeting
         $meetingParams->setMuteOnStart(
             $request->get('muteOnStart', config('bigbluebutton.create.muteOnStart', false))
         );
-
         $meetingParams->setLockSettingsDisableCam(
             $request->get('lockSettingsDisableCam', config('bigbluebutton.create.lockSettingsDisableCam', false))
         );
@@ -151,7 +154,9 @@ trait InitMeeting
         $meetingParams = new JoinMeetingParameters($request->meetingID, $request->userName, $request->password);
         $meetingParams->setRedirect($request->get('redirect', config('bigbluebutton.join.redirect', true)));
         $meetingParams->setJoinViaHtml5($request->get('joinViaHtml5', config('bigbluebutton.join.joinViaHtml5', true)));
-        $meetingParams->setUserId($request->get('userId', null));
+        if(!is_null($request->get('userId'))) {
+            $meetingParams->setUserId($request->get('userId'));
+        }
         if ($request->createTime) {
             $meetingParams->setCreationTime($request->createTime);
         }
@@ -217,7 +222,11 @@ trait InitMeeting
         if (isset($parameters['userName'])) {
             $pass['userName'] = $parameters['userName'];
         }
-        $pass['meetingName'] = $object->get('meetingName');
+        if(isset($parameters['meetingName'])) {
+            $pass['meetingName'] = $parameters['meetingName'];
+        } else {
+            $pass['meetingName'] = $object->get('meetingName');
+        }
         if (isset($parameters['redirect'])) {
             $pass['redirect'] = $parameters['redirect'];
         }
@@ -249,6 +258,7 @@ trait InitMeeting
     {
         if ($this->getMeetingInfo($parameters)->isEmpty()) {
             $object = $this->create($parameters);
+
             if (method_exists($object, 'isEmpty') && ! $object->isEmpty()) {
                 return $this->join($this->makeJoinMeetingArray($object, $parameters));
             }

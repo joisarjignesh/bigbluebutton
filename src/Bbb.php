@@ -26,9 +26,7 @@ class Bbb
 {
     use InitMeeting,
         InitRecordings,
-        InitHooks,
-        InitConfigXml,
-        InitExtra;
+        InitHooks;
 
     /**
      * @var
@@ -94,12 +92,7 @@ class Bbb
      */
     public function isConnect()
     {
-        $response = $this->initIsConnect();
-        if ($response['flag'] === true) {
-            return true;
-        }
-
-        return false;
+        return $this->bbb->isConnectionWorking();
     }
 
     /**
@@ -344,33 +337,6 @@ class Bbb
         $this->response = $this->bbb->updateRecordings($recording);
 
         return collect(XmlToArray($this->response->getRawXml()));
-    }
-
-    /**
-     * @param $configXml
-     * @return \Illuminate\Support\Collection
-     *
-     * @throws \Exception
-     */
-    public function setConfigXml($configXml)
-    {
-        if (! $configXml instanceof SetConfigXMLParameters) {
-            $configXml = $this->initSetConfigXml($configXml);
-        }
-
-        $this->response = $this->bbb->setConfigXML($configXml);
-
-        return collect(XmlToArray($this->response->getRawXml()));
-    }
-
-    /**
-     * @return \BigBlueButton\Responses\GetDefaultConfigXMLResponse
-     */
-    public function getDefaultConfigXml()
-    {
-        $this->response = $this->bbb->getDefaultConfigXML();
-
-        return $this->response;
     }
 
     /**

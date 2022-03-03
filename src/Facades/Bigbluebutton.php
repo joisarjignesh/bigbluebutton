@@ -27,10 +27,10 @@ use Illuminate\Support\Facades\Facade;
  * @method static initPublishRecordings(array $array)
  * @method static setConfigXml($arrayOtherWiseObject)
  * @method static getApiVersion()
- * @method static initSetConfigXml(array $array)
- * @method static getDefaultConfigXml()
  * @method static hooksCreate(array $array)
  * @method static hooksDestroy(array $array)
+ * @method static server(string $serverName)
+ * @method static isConnect()
  *
  * @see \JoisarJignesh\Bigbluebutton\Bbb
  */
