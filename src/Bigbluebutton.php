@@ -15,13 +15,13 @@ class Bigbluebutton extends BigBlueButtonParent
      *
      * @param $bbbServerBaseUrl API Base Url
      * @param $securitySecret API Server secret
-     * @param TransportInterface|null $transport
+     * @param  TransportInterface|null  $transport
      */
     public function __construct($bbbServerBaseUrl, $securitySecret, $transport = null)
     {
         $this->bbbServerBaseUrl = Str::finish(trim($bbbServerBaseUrl), '/');
         $this->securitySecret = trim($securitySecret);
         $this->urlBuilder = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl);
-        $this->transport  = $transport ?? CurlTransport::createWithDefaultOptions();
+        $this->transport = $transport ?? CurlTransport::createWithDefaultOptions();
     }
 }
