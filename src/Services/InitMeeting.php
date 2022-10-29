@@ -50,10 +50,16 @@ trait InitMeeting
                 $request->get('welcome', config('bigbluebutton.create.welcomeMessage', null))
             );
         }
-
         $meetingParams->setDialNumber(
             $request->get('dialNumber', config('bigbluebutton.create.dialNumber', null))
         );
+
+        if(!empty($request->get('voiceBridge'))) {
+            $meetingParams->setVoiceBridge(
+                $request->get('voiceBridge', null)
+            );
+        }
+
         $meetingParams->setBreakout(
             $request->get('isBreakout', config('bigbluebutton.create.isBreakout', false))
         );
