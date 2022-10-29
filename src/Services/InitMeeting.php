@@ -35,7 +35,7 @@ trait InitMeeting
         $meetingParams->setRecord($request->get('record', config('bigbluebutton.create.record', false)));
         $meetingParams->setMaxParticipants($request->get('maxParticipants', config('bigbluebutton.create.maxParticipants', 0)));
         if (! is_null($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)))) {
-            $meetingParams->setLogoutUrl($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)));
+            $meetingParams->setLogoutURL($request->get('logoutUrl', config('bigbluebutton.create.logoutUrl', null)));
         }
         $meetingParams->setGuestPolicy(
             $request->get('guestPolicy', config('bigbluebutton.create.guestPolicy', 'ALWAYS_ACCEPT'))
