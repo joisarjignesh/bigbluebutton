@@ -40,11 +40,17 @@ trait InitMeeting
         $meetingParams->setGuestPolicy(
             $request->get('guestPolicy', config('bigbluebutton.create.guestPolicy', 'ALWAYS_ACCEPT'))
         );
-        if (! is_null($request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null)))) {
-            $meetingParams->setWelcomeMessage(
+        if (!is_null($request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null)))) {
+            $meetingParams->setWelcome(
                 $request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null))
             );
         }
+        if (!is_null($request->get('welcome', config('bigbluebutton.create.welcomeMessage', null)))) {
+            $meetingParams->setWelcome(
+                $request->get('welcome', config('bigbluebutton.create.welcomeMessage', null))
+            );
+        }
+
         $meetingParams->setDialNumber(
             $request->get('dialNumber', config('bigbluebutton.create.dialNumber', null))
         );
