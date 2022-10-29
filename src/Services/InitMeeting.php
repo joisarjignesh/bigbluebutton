@@ -25,7 +25,10 @@ trait InitMeeting
     public function initCreateMeeting(array $parameters)
     {
         $request = Fluent($parameters);
-        $meetingParams = new CreateMeetingParameters($request->get('meetingID'), $request->get('meetingName', 'default meeting name '.Str::random(7)));
+        $meetingParams = new CreateMeetingParameters(
+            $request->get('meetingID', Str::uuid()),
+            $request->get('meetingName', 'default meeting name '.Str::random(7))
+        );
         $meetingParams->setModeratorPW($request->get('moderatorPW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
         $meetingParams->setAttendeePW($request->get('attendeePW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
         $meetingParams->setDuration($request->get('duration', config('bigbluebutton.create.duration', 0)));
