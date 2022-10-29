@@ -25,7 +25,7 @@ class CloseMeetingTest extends TestCase
         $instance = Bigbluebutton::initCloseMeeting(['meetingID' => $meetingId, 'moderatorPW' => $password]);
         $this->assertInstanceOf(\BigBlueButton\Parameters\EndMeetingParameters::class, $instance);
 
-        $this->assertEquals($meetingId, $instance->getMeetingId());
+        $this->assertEquals($meetingId, $instance->getMeetingID());
         $this->assertEquals($password, $instance->getPassword());
         $this->assertEquals('meetingID='.$meetingId.'&password='.$password, $instance->getHTTPQuery());
     }
