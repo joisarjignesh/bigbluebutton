@@ -26,8 +26,8 @@ trait InitMeeting
     {
         $request = Fluent($parameters);
         $meetingParams = new CreateMeetingParameters($request->get('meetingID'), $request->get('meetingName', 'default meeting name '.Str::random(7)));
-        $meetingParams->setModeratorPassword($request->get('moderatorPW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
-        $meetingParams->setAttendeePassword($request->get('attendeePW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
+        $meetingParams->setModeratorPW($request->get('moderatorPW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
+        $meetingParams->setAttendeePW($request->get('attendeePW', Str::random(config('bigbluebutton.create.passwordLength', 8))));
         $meetingParams->setDuration($request->get('duration', config('bigbluebutton.create.duration', 0)));
         $meetingParams->setRecord($request->get('record', config('bigbluebutton.create.record', false)));
         $meetingParams->setMaxParticipants($request->get('maxParticipants', config('bigbluebutton.create.maxParticipants', 0)));
