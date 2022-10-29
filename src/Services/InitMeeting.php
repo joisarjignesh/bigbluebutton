@@ -60,7 +60,7 @@ trait InitMeeting
             );
         }
 
-        $meetingParams->setBreakout(
+        $meetingParams->setBreakoutRoomsEnabled(
             $request->get('isBreakout', config('bigbluebutton.create.isBreakout', false))
         );
         $meetingParams->setModeratorOnlyMessage(
