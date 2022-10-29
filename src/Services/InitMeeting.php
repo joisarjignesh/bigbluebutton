@@ -40,12 +40,12 @@ trait InitMeeting
         $meetingParams->setGuestPolicy(
             $request->get('guestPolicy', config('bigbluebutton.create.guestPolicy', 'ALWAYS_ACCEPT'))
         );
-        if (!is_null($request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null)))) {
+        if (! is_null($request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null)))) {
             $meetingParams->setWelcome(
                 $request->get('welcomeMessage', config('bigbluebutton.create.welcomeMessage', null))
             );
         }
-        if (!is_null($request->get('welcome', config('bigbluebutton.create.welcomeMessage', null)))) {
+        if (! is_null($request->get('welcome', config('bigbluebutton.create.welcomeMessage', null)))) {
             $meetingParams->setWelcome(
                 $request->get('welcome', config('bigbluebutton.create.welcomeMessage', null))
             );
@@ -54,7 +54,7 @@ trait InitMeeting
             $request->get('dialNumber', config('bigbluebutton.create.dialNumber', null))
         );
 
-        if(!empty($request->get('voiceBridge'))) {
+        if (! empty($request->get('voiceBridge'))) {
             $meetingParams->setVoiceBridge(
                 $request->get('voiceBridge', null)
             );
@@ -199,39 +199,39 @@ trait InitMeeting
     {
         $request = Fluent($parameters);
         $meetingParams = new JoinMeetingParameters($request->meetingID, $request->userName, $request->password);
-        if (!empty($request->get('role'))) {
+        if (! empty($request->get('role'))) {
             $meetingParams->setRole($request->get('role'));
         }
         $meetingParams->setRedirect($request->get('redirect', config('bigbluebutton.join.redirect', true)));
         $meetingParams->setJoinViaHtml5($request->get('joinViaHtml5', config('bigbluebutton.join.joinViaHtml5', true)));
-        if (!is_null($request->get('userId'))) {
+        if (! is_null($request->get('userId'))) {
             $meetingParams->setUserID($request->get('userId'));
         }
-        if (!is_null($request->get('userID'))) {
+        if (! is_null($request->get('userID'))) {
             $meetingParams->setUserID($request->get('userID'));
         }
-        if (!empty($request->get('createTime'))) {
+        if (! empty($request->get('createTime'))) {
             $meetingParams->setCreateTime($request->get('createTime'));
         }
-        if (!empty($request->get('defaultLayout'))) {
+        if (! empty($request->get('defaultLayout'))) {
             $meetingParams->setDefaultLayout($request->get('defaultLayout'));
         }
-        if (!empty($request->get('configToken'))) {
+        if (! empty($request->get('configToken'))) {
             $meetingParams->setConfigToken($request->get('configToken'));
         }
-        if (!empty($request->get('webVoiceConf'))) {
+        if (! empty($request->get('webVoiceConf'))) {
             $meetingParams->setWebVoiceConf($request->get('webVoiceConf'));
         }
-        if (!empty($request->get('avatarUrl'))) {
+        if (! empty($request->get('avatarUrl'))) {
             $meetingParams->setAvatarURL($request->get('avatarUrl'));
         }
-        if (!empty($request->get('clientUrl'))) {
+        if (! empty($request->get('clientUrl'))) {
             $meetingParams->setClientURL($request->get('clientUrl'));
         }
-        if (!empty($request->get('guest'))) {
+        if (! empty($request->get('guest'))) {
             $meetingParams->setGuest($request->get('guest'));
         }
-        if (!empty($request->get('excludeFromDashboard'))) {
+        if (! empty($request->get('excludeFromDashboard'))) {
             $meetingParams->setExcludeFromDashboard($request->get('excludeFromDashboard'));
         }
         if ($request->customParameters && is_array($request->customParameters)) {
