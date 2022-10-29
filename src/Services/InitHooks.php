@@ -22,7 +22,7 @@ trait InitHooks
     {
         $parameters = Fluent($parameters);
         $hooksCreate = new HooksCreateParameters($parameters->get('callbackURL'));
-        if (!empty($parameters->get('meetingID'))) {
+        if (! empty($parameters->get('meetingID'))) {
             $hooksCreate->setMeetingID($parameters->meetingID);
         }
         $hooksCreate->setGetRaw($parameters->get('getRaw', false));
