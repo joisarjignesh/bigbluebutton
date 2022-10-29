@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Facade;
  * @method static initDeleteRecordings(array $array)
  * @method static initStart(array $array)
  * @method static initPublishRecordings(array $array)
- * @method static setConfigXml($arrayOtherWiseObject)
  * @method static getApiVersion()
  * @method static hooksCreate(array $array)
  * @method static hooksDestroy(array $array)
