@@ -212,7 +212,7 @@ class Bbb
     /**
      * @param $parameters
      *
-     *  required fields
+     * required fields
      * meetingID
      * meetingName
      * userName
@@ -229,9 +229,9 @@ class Bbb
      *  Close meeting.
      *
      * @param  $meeting
-     *                   required fields:
-     *                   meetingID
-     *                   moderatorPW close meeting must be there moderator password
+     * required fields:
+     * meetingID
+     * moderatorPW close meeting must be there moderator password
      * @return bool
      */
     public function close($meeting)

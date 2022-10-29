@@ -129,6 +129,21 @@ return [
         'webcamsOnlyForModerator'            => false,
 
         /**
+         * Will set the banner text in the client. (added 2.0)
+         *
+         * var @string
+         */
+        'bannerText'            => null,
+
+
+        /**
+         * Will set the banner background color in the client. The required format is color hex #FFFFFF. (added 2.0)
+         *
+         * var @string
+         */
+        'bannerColor'            => "#FFFFFF",
+
+        /**
          * Setting logo=http://www.example.com/my-custom-logo.png will replace
          * the default logo in the Flash client. (added 2.0).
          *
@@ -166,13 +181,14 @@ return [
          */
         'muteOnStart'                        => false,
 
+
         /**
          * Default allowModsToUnmuteUsers=false.
          * Setting to allowModsToUnmuteUsers=true will allow moderators to unmute other users in the meeting. (added 2.2).
          *
          * var @bool
          */
-        //'allowModsToUnmuteUsers'             => false,
+        'allowModsToUnmuteUsers'             => false,
 
         /**
          *  Default lockSettingsDisableCam=false.
@@ -248,6 +264,73 @@ return [
          * var @string
          */
         'guestPolicy'                        => 'ALWAYS_ACCEPT',
+
+        /**
+         * Defaults to the value of defaultKeepEvents.
+         * If meetingKeepEvents is true BigBlueButton saves meeting events even if the meeting is not recorded (added in 2.3)
+         *
+         * var @bool
+         */
+        'meetingKeepEvents' => false,
+
+        /**
+         * Default endWhenNoModerator=false.
+         * If endWhenNoModerator is true the meeting will end automatically after a delay - see endWhenNoModeratorDelayInMinutes (added in 2.3)
+         *
+         * var @bool
+         */
+        'endWhenNoModerator' => false,
+
+        /**
+         * Defaults to the value of endWhenNoModeratorDelayInMinutes=1.
+         * If endWhenNoModerator is true, the meeting will be automatically ended after this many minutes (added in 2.2)
+         *
+         * var @integer
+         */
+        'endWhenNoModeratorDelayInMinutes' => 1,
+
+        /**
+         * Will set the default layout for the meeting.
+         * Possible values are: CUSTOM_LAYOUT, SMART_LAYOUT, PRESENTATION_FOCUS, VIDEO_FOCUS. (added 2.4)
+         * Default: SMART_LAYOUT
+         *
+         * var @enum
+         */
+        'meetingLayout' => 'SMART_LAYOUT',
+
+        /**
+         * Default learningDashboardCleanupDelayInMinutes=2.
+         * This option set the delay (in minutes) before the Learning Dashboard become unavailable after the end of the meeting.
+         * If this value is zero, the Learning Dashboard will keep available permanently. (added 2.4)
+         *
+         * var @integer
+         */
+        'learningDashboardCleanupDelayInMinutes' => 2,
+
+        /**
+         * Setting to true will allow moderators to close other users cameras in the meeting. (added 2.4)
+         * Default: false
+         *
+         * var @bool
+         */
+        'allowModsToEjectCameras' => false,
+
+        /**
+         * Setting to true will allow users to join meetings without session cookie's validation. (added 2.4.3)
+         * Default: false
+         *
+         * var @bool
+         */
+        'allowRequestsWithoutSession' => false,
+
+        /**
+         *  Setting to 0 will disable this threshold.
+         *  Defines the max number of webcams a single user can share simultaneously. (added 2.4.5)
+         *  Default: 3
+         *
+         * var @integer
+         */
+        'userCameraCap' => 3,
     ],
     'join'                => [
         /**
