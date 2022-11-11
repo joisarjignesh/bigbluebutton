@@ -203,7 +203,6 @@ trait InitMeeting
             $meetingParams->setRole($request->get('role'));
         }
         $meetingParams->setRedirect($request->get('redirect', config('bigbluebutton.join.redirect', true)));
-        $meetingParams->setJoinViaHtml5($request->get('joinViaHtml5', config('bigbluebutton.join.joinViaHtml5', true)));
         if (! is_null($request->get('userId'))) {
             $meetingParams->setUserID($request->get('userId'));
         }
