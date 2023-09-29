@@ -243,7 +243,7 @@ trait InitMeeting
     }
 
     /**
-     * @param $parameters
+     * @param  $parameters
      *
      * required fields
      * meetingID
@@ -262,7 +262,7 @@ trait InitMeeting
     }
 
     /**
-     * @param $parameters
+     * @param  $parameters
      *
      * required fields
      * meetingID

@@ -47,7 +47,7 @@ class Bbb
     /**
      * for specific server instance.
      *
-     * @param $serverName
+     * @param  $serverName
      * @return Bbb
      *
      * @throws \Exception
@@ -117,7 +117,7 @@ class Bbb
     /**
      * $meeting.
      *
-     * @param $meeting
+     * @param  $meeting
      *
      * required fields
      * meetingID
@@ -139,7 +139,7 @@ class Bbb
     }
 
     /**
-     * @param $meeting
+     * @param  $meeting
      *
      * required fields:
      * meetingID
@@ -165,8 +165,8 @@ class Bbb
     /**
      *  Join meeting.
      *
-     * @param $meeting
-     * required fields
+     * @param  $meeting
+     *                   required fields
      *
      *  meetingID
      *  userName join by name
@@ -189,10 +189,10 @@ class Bbb
     /**
      *  Returns information about the meeting.
      *
-     * @param $meeting
-     * required fields
-     * meetingID
-     * moderatorPW must be there moderator password
+     * @param  $meeting
+     *                   required fields
+     *                   meetingID
+     *                   moderatorPW must be there moderator password
      * @return \Illuminate\Support\Collection
      */
     public function getMeetingInfo($meeting)
@@ -210,7 +210,7 @@ class Bbb
     }
 
     /**
-     * @param $parameters
+     * @param  $parameters
      *
      * required fields
      * meetingID
@@ -249,9 +249,9 @@ class Bbb
     }
 
     /**
-     * @param $recording
-     * required fields
-     * meetingID
+     * @param  $recording
+     *                     required fields
+     *                     meetingID
      *
      * optional fields
      * recordID
@@ -278,9 +278,9 @@ class Bbb
     }
 
     /**
-     * @param $recording
-     * recordID as string(separated by comma)
-     * publish as bool
+     * @param  $recording
+     *                     recordID as string(separated by comma)
+     *                     publish as bool
      * @return bool
      */
     public function publishRecordings($recording)
@@ -301,7 +301,7 @@ class Bbb
     }
 
     /**
-     * @param $recording
+     * @param  $recording
      *
      * required fields
      * recordingID
@@ -319,7 +319,7 @@ class Bbb
     }
 
     /**
-     * @param $recording
+     * @param  $recording
      *
      * required fields
      * recordingID
@@ -347,7 +347,7 @@ class Bbb
     }
 
     /**
-     * @param $hooks
+     * @param  $hooks
      * @return \Illuminate\Support\Collection
      */
     public function hooksCreate($hooks)
@@ -362,7 +362,7 @@ class Bbb
     }
 
     /**
-     * @param $hooks
+     * @param  $hooks
      * @return \Illuminate\Support\Collection
      */
     public function hooksDestroy($hooks)
