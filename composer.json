@@ -14,7 +14,7 @@
     ],
     "homepage": "https://github.com/joisarjignesh/bigbluebutton",
     "license": "MIT",
-    "version": "v2.4.4",
+    "version": "v2.5",
     "type": "library",
     "authors": [
         {
@@ -25,9 +25,9 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0|^8.1",
+        "php": "^7.4|^8.0|^8.1|^8.2",
         "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0",
-        "littleredbutton/bigbluebutton-api-php": "dev-master"
+        "littleredbutton/bigbluebutton-api-php": "~5.0"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0|^7.0|^8.0",
