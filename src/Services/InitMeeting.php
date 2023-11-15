@@ -85,7 +85,7 @@ trait InitMeeting
             $request->get('webcamsOnlyForModerator', config('bigbluebutton.create.webcamsOnlyForModerator', false))
         );
         $meetingParams->setBannerText(
-            $request->get('bannerText', config('bigbluebutton.create.webcamsOnlyForModerator', null))
+            $request->get('bannerText', config('bigbluebutton.create.bannerText', null))
         );
         $meetingParams->setBannerColor(
             $request->get('bannerColor', null)
