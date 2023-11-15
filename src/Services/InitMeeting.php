@@ -63,15 +63,15 @@ trait InitMeeting
         $meetingParams->setBreakout(
             $request->get('isBreakout', config('bigbluebutton.create.isBreakout', false))
         );
-        
+
         $meetingParams->setParentMeetingID(
-            $request->get('parentMeetingID', "")
+            $request->get('parentMeetingID', '')
         );
 
         $meetingParams->setSequence(
             $request->get('sequence', rand(1, 10000))
         );
-        
+
         $meetingParams->setModeratorOnlyMessage(
             $request->get('moderatorOnlyMessage', config('bigbluebutton.create.moderatorOnlyMessage', null))
         );
