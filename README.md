@@ -107,7 +107,7 @@ $meetingParams = new CreateMeetingParameters($meetingID, $meetingName);
 $meetingParams->setModeratorPW('moderatorPassword');
 $meetingParams->setAttendeePW('attendeePassword');
 
-\Bigblubutton::create($meetingParams);
+\Bigbluebutton::create($meetingParams);
 ```
 
 3.By passing array it will return CreateMeetingParameters object for overwrite methods
