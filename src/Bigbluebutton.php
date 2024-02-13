@@ -21,7 +21,7 @@ class Bigbluebutton extends BigBlueButtonParent
     {
         $this->bbbServerBaseUrl = Str::finish(trim($bbbServerBaseUrl), '/');
         $this->securitySecret = trim($securitySecret);
-        $this->urlBuilder = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl, config("bigbluebutton.hash_algorithm", "sha1"));
+        $this->urlBuilder = new UrlBuilder($this->securitySecret, $this->bbbServerBaseUrl, config('bigbluebutton.hash_algorithm', 'sha1'));
         $this->transport = $transport ?? CurlTransport::createWithDefaultOptions();
     }
 }
