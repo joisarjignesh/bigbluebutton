@@ -8,6 +8,11 @@ return [
     'BBB_SECURITY_SALT'   => env('BBB_SECURITY_SALT', ''),
     'BBB_SERVER_BASE_URL' => env('BBB_SERVER_BASE_URL', ''),
 
+    /*
+    * available hash algorithm sha1,sha256,sha512,sha384
+    */
+    'hash_algorithm' => 'sha1',
+
     /**
      * For Multiple BigBlueButton Server Configurations
      * For Each server you must be specify salt and url with define server name
