@@ -9,17 +9,19 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest, windows-latest, macos-latest]
-        php-versions: ['7.4','8.0','8.1']
+        php-versions: ['7.4', '8.0', '8.1', '8.2']
+
     runs-on: ${{ matrix.operating-system }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Setup PHP, with composer and extensions
-        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          coverage: none #optional
+          coverage: none
           extensions: curl, libxml, mbstring, zip
 
       - name: Get composer cache directory
@@ -30,8 +32,6 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.composercache.outputs.dir }}
-          # Use composer.json for key, if composer.lock is not committed.
-          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ runner.os }}-composer-
 
@@ -40,4 +40,3 @@ jobs:
 
       - name: Test with phpunit
         run: vendor/bin/phpunit --coverage-text
-
