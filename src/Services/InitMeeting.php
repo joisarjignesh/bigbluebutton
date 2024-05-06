@@ -247,6 +247,9 @@ trait InitMeeting
                 $meetingParams->addUserData($key, $value);
             }
         }
+        if (! empty($request->get('errorRedirectUrl'))) {
+            $meetingParams->setErrorRedirectUrl($request->get('errorRedirectUrl'));
+        }
 
         return $meetingParams;
     }
