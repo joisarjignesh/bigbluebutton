@@ -334,6 +334,134 @@ return [
          * var @integer
          */
         'userCameraCap' => 3,
+
+         /**
+         * List of features to disable in a particular meeting.
+         * Can be provided as a comma-separated string or array.
+         *
+         * Available options to disable:
+         *  - breakoutRooms
+         *  - captions
+         *  - chat
+         *  - privateChat
+         *  - deleteChatMessage
+         *  - editChatMessage
+         *  - replyChatMessage
+         *  - chatMessageReactions
+         *  - downloadPresentationWithAnnotations
+         *  - downloadPresentationConvertedToPdf
+         *  - downloadPresentationOriginalFile
+         *  - snapshotOfCurrentSlide
+         *  - externalVideos
+         *  - importPresentationWithAnnotationsFromBreakoutRooms
+         *  - importSharedNotesFromBreakoutRooms
+         *  - layouts
+         *  - learningDashboard
+         *  - learningDashboardDownloadSessionData
+         *  - polls
+         *  - screenshare
+         *  - sharedNotes
+         *  - virtualBackgrounds
+         *  - customVirtualBackgrounds
+         *  - liveTranscription
+         *  - presentation
+         *  - cameraAsContent
+         *  - timer
+         *  - infiniteWhiteboard (BBB 3.0+)
+         *  - raiseHand (BBB 3.0+)
+         *  - userReactions (BBB 3.0+)
+         *  - chatEmojiPicker (BBB 3.0+)
+         *  - quizzes (BBB 3.0+)
+         *
+         * @var string|array|null
+         * Default: ''
+         */
+        'disabledFeatures' => '',
+
+         /**
+         * List of features to EXCLUDE from disabled features.
+         * Same options as "disabledFeatures".
+         *
+         * @var string|array|null
+         * Default: ''
+         */
+        'disabledFeaturesExclude' => '',
+
+        /**
+         * If true, the default.pdf is NOT sent with presentations.
+         * If false, default.pdf is sent.
+         *
+         * @var bool
+         * Default: true
+         */
+        'preUploadedPresentationOverrideDefault' => true,
+
+        /**
+         * If true, show consent modal when recording starts.
+         *
+         * @var bool
+         * Default: false
+         * @since 2.6
+         */
+        'notifyRecordingIsOn' => false,
+
+        /**
+         * External URL for uploading presentations.
+         * Only works if presentationUploadExternalDescription is also set.
+         *
+         * @var string|null
+         * Default: null
+         * @since 2.6
+         */
+        'presentationUploadExternalUrl' => null,
+
+        /**
+         * Message displayed in uploader modal when using external uploads.
+         * Only works if presentationUploadExternalUrl is set.
+         *
+         * @var string|null
+         * Default: null
+         * @since 2.6
+         */
+        'presentationUploadExternalDescription' => null,
+
+         /**
+         * If true, capture full duration of media (audio, camera, screenshare).
+         * If false, capture media only while recording is running.
+         *
+         * @var bool
+         * Default: false
+         * @since 2.6.9
+         */
+        'recordFullDurationMedia' => false,
+
+        /**
+         * URL of a pre-uploaded presentation file.
+         *
+         * @var string|null
+         * Default: null
+         * @since 2.7.2
+         */
+        'preUploadedPresentation' => null,
+
+         /**
+         * Custom name for the pre-uploaded presentation.
+         *
+         * @var string|null
+         * Default: null
+         * @since 2.7.2
+         */
+        'preUploadedPresentationName' => null,
+
+        /**
+         * If passed as true, we allow moderators to promote guests to moderators even if the authenticatedGuest config is enabled.
+         * The defaultAllowPromoteGuestToModerator configuration sets this behaviour globally for all meetings if no api parameter is passed
+         *
+         * @var bool
+         * Default: false
+         * @since 2.7.9
+         */
+        'allowPromoteGuestToModerator' => false
     ],
     'join' => [
         /**
