@@ -158,16 +158,16 @@ trait InitMeeting
             $meetingParams->setRecordingReadyCallbackUrl($request->get('bbb-recording-ready-url', null));
         }
         $disabledFeatures = $request->get('disabledFeatures', config('bigbluebutton.create.disabledFeatures', null));
-        if (!empty($disabledFeatures)) {
-            if (!is_array($disabledFeatures)) {
+        if (! empty($disabledFeatures)) {
+            if (! is_array($disabledFeatures)) {
                 $disabledFeatures = explode(',', $disabledFeatures);
             }
 
             $meetingParams->setDisabledFeatures($disabledFeatures);
         }
         $disabledFeaturesExclude = $request->get('disabledFeaturesExclude', config('bigbluebutton.create.disabledFeaturesExclude', null));
-        if (!empty($request->get('disabledFeaturesExclude'))) {
-            if (!is_array($disabledFeaturesExclude)) {
+        if (! empty($request->get('disabledFeaturesExclude'))) {
+            if (! is_array($disabledFeaturesExclude)) {
                 $disabledFeaturesExclude = explode(',', $disabledFeaturesExclude);
             }
 
@@ -180,22 +180,22 @@ trait InitMeeting
             (bool) $request->get('notifyRecordingIsOn', config('bigbluebutton.create.notifyRecordingIsOn', false))
         );
         $presentationUploadExternalUrl = $request->get('presentationUploadExternalUrl', config('bigbluebutton.create.presentationUploadExternalUrl'));
-        if (!empty($presentationUploadExternalUrl)) {
+        if (! empty($presentationUploadExternalUrl)) {
             $meetingParams->setPresentationUploadExternalUrl($presentationUploadExternalUrl);
         }
         $presentationUploadExternalDescription = $request->get('presentationUploadExternalDescription', config('bigbluebutton.create.presentationUploadExternalDescription'));
-        if (!empty($presentationUploadExternalDescription)) {
+        if (! empty($presentationUploadExternalDescription)) {
             $meetingParams->setPresentationUploadExternalDescription($presentationUploadExternalDescription);
         }
         $meetingParams->setRecordFullDurationMedia(
             (bool) $request->get('recordFullDurationMedia', config('bigbluebutton.create.recordFullDurationMedia', false))
         );
         $preUploadedPresentation = $request->get('preUploadedPresentation', config('bigbluebutton.create.preUploadedPresentation'));
-        if (!empty($preUploadedPresentation)) {
+        if (! empty($preUploadedPresentation)) {
             $meetingParams->setPreUploadedPresentation($preUploadedPresentation);
         }
         $preUploadedPresentationName = $request->get('preUploadedPresentationName', config('bigbluebutton.create.preUploadedPresentationName'));
-        if (!empty($preUploadedPresentationName)) {
+        if (! empty($preUploadedPresentationName)) {
             $meetingParams->setPreUploadedPresentationName($preUploadedPresentationName);
         }
         $meetingParams->setAllowPromoteGuestToModerator(
