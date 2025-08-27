@@ -166,7 +166,7 @@ class Bbb
      *  Join meeting.
      *
      * @param  $meeting
-     *                   required fields
+     *                  required fields
      *
      *  meetingID
      *  userName join by name
@@ -190,9 +190,9 @@ class Bbb
      *  Returns information about the meeting.
      *
      * @param  $meeting
-     *                   required fields
-     *                   meetingID
-     *                   moderatorPW must be there moderator password
+     *                  required fields
+     *                  meetingID
+     *                  moderatorPW must be there moderator password
      * @return \Illuminate\Support\Collection
      */
     public function getMeetingInfo($meeting)
@@ -229,9 +229,9 @@ class Bbb
      *  Close meeting.
      *
      * @param  $meeting
-     *                   required fields:
-     *                   meetingID
-     *                   moderatorPW close meeting must be there moderator password
+     *                  required fields:
+     *                  meetingID
+     *                  moderatorPW close meeting must be there moderator password
      * @return bool
      */
     public function close($meeting)
@@ -250,8 +250,8 @@ class Bbb
 
     /**
      * @param  $recording
-     *                     required fields
-     *                     meetingID
+     *                    required fields
+     *                    meetingID
      *
      * optional fields
      * recordID
@@ -279,8 +279,8 @@ class Bbb
 
     /**
      * @param  $recording
-     *                     recordID as string(separated by comma)
-     *                     publish as bool
+     *                    recordID as string(separated by comma)
+     *                    publish as bool
      * @return bool
      */
     public function publishRecordings($recording)
